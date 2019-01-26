@@ -1,26 +1,28 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.robot.CANTalonSRX;
 import frc.robot.RobotMap;
+import frc.robot.commands.TeleDrive;
 
 public class DriveTrain extends Subsystem {
+    private final CANSparkMax frontLeftMotor = new CANSparkMax(RobotMap.FRONT_LEFT_MOTOR, MotorType.kBrushless);
+    private final CANSparkMax frontRightMotor = new CANSparkMax(RobotMap.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
+    private final CANSparkMax backLeftMotor = new CANSparkMax(RobotMap.BACK_LEFT_MOTOR, MotorType.kBrushless);
+    private final CANSparkMax backRightMotor = new CANSparkMax(RobotMap.BACK_RIGHT_MOTOR, MotorType.kBrushless);
+
     private final DifferentialDrive differentialDrive;
 
     public DriveTrain() {
         super();
-        SpeedController frontLeftMotor = new CANTalonSRX(RobotMap.FRONT_LEFT_MOTOR);
-        SpeedController frontRightMotor = new CANTalonSRX(RobotMap.FRONT_RIGHT_MOTOR);
-        SpeedController backLeftMotor = new CANTalonSRX(RobotMap.BACK_LEFT_MOTOR);
-        SpeedController backRightMotor = new CANTalonSRX(RobotMap.BACK_RIGHT_MOTOR);
 
-        SpeedControllerGroup leftMotorGroup = new SpeedControllerGroup(frontLeftMotor, backLeftMotor);
-        SpeedControllerGroup rightMotorGroup = new SpeedControllerGroup(frontRightMotor, backRightMotor);
+        backRightMotor.follow(frontRightMotor);
+        backLeftMotor.follow(frontLeftMotor);
 
-        differentialDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
+        differentialDrive = new DifferentialDrive(frontLeftMotor, frontRightMotor);
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {
@@ -40,7 +42,16 @@ public class DriveTrain extends Subsystem {
     }
 
     @Override
-    protected void initDefaultCommand() {
+    public void close() {
+        frontLeftMotor.close();
+        frontRightMotor.close();
+        backLeftMotor.close();
+        backRightMotor.close();
+        super.close();
+    }
 
+    @Override
+    protected void initDefaultCommand() {
+        setDefaultCommand(new TeleDrive());
     }
 }
