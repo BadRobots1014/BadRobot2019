@@ -1,6 +1,7 @@
 package frc.robot;
 
-public class RobotMap {
+public class RobotMap
+{
   /**
    * Drivetrain Motors
    */

@@ -22,13 +22,15 @@ import frc.robot.subsystems.Grabber;
  * creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends TimedRobot {
+public class Robot extends TimedRobot
+{
   public static DriveTrain driveTrain = new DriveTrain();
   public static Lifter lifter = new Lifter();
   public static Grabber grabber = new Grabber();
 
   @Override
-  public void robotInit() {
+  public void robotInit()
+  {
     BadLog log = BadLog.init("test.bag");
     BadLog.createValue("Example Value", System.getProperty("os.version"));
     BadLog.createTopic("Example Topic", "Bytes", () -> (double) Runtime.getRuntime().freeMemory());
@@ -47,7 +49,8 @@ public class Robot extends TimedRobot {
    * and SmartDashboard integrated updating.
    */
   @Override
-  public void robotPeriodic() {
+  public void robotPeriodic()
+  {
   }
 
   /**
@@ -56,35 +59,42 @@ public class Robot extends TimedRobot {
    * robot is disabled.
    */
   @Override
-  public void disabledInit() {
+  public void disabledInit()
+  {
   }
 
   @Override
-  public void disabledPeriodic() {
+  public void disabledPeriodic()
+  {
     Scheduler.getInstance().run();
   }
 
   @Override
-  public void autonomousInit() {
+  public void autonomousInit()
+  {
     teleopInit();
   }
 
   @Override
-  public void autonomousPeriodic() {
+  public void autonomousPeriodic()
+  {
     teleopPeriodic();
   }
 
   @Override
-  public void teleopInit() {
+  public void teleopInit()
+  {
 
   }
 
   @Override
-  public void teleopPeriodic() {
+  public void teleopPeriodic()
+  {
     Scheduler.getInstance().run();
   }
 
   @Override
-  public void testPeriodic() {
+  public void testPeriodic()
+  {
   }
 }

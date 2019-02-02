@@ -5,36 +5,43 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedController;
 
-public class CANTalonSRX extends TalonSRX implements SpeedController {
+public class CANTalonSRX extends TalonSRX implements SpeedController
+{
     private boolean disabled;
 
-    public CANTalonSRX(int deviceNumber) {
+    public CANTalonSRX(int deviceNumber)
+    {
         super(deviceNumber);
     }
 
     @Override
-    public void pidWrite(double output) {
+    public void pidWrite(double output)
+    {
 
     }
 
     @Override
-    public void set(double speed) {
+    public void set(double speed)
+    {
         if (!disabled)
             super.set(ControlMode.PercentOutput, speed);
     }
 
     @Override
-    public double get() {
+    public double get()
+    {
         return getMotorOutputPercent();
     }
 
     @Override
-    public void disable() {
+    public void disable()
+    {
         disabled = true;
     }
 
     @Override
-    public void stopMotor() {
+    public void stopMotor()
+    {
         set(0);
     }
 }

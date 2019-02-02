@@ -2,9 +2,11 @@ package frc.robot.commands;
 
 import frc.robot.Robot;
 
-public class ResetCamPosition extends RotateGrabberCW {
+public class ResetCamPosition extends RotateGrabberCW
+{
     @Override
-    protected boolean isFinished() {
+    protected boolean isFinished()
+    {
         return Robot.grabber.isCamInBackPosition();
     }
 }

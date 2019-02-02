@@ -8,28 +8,34 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
-public class Grabber extends Subsystem {
+public class Grabber extends Subsystem
+{
     private SpeedController motor = new CANSparkMax(RobotMap.GRABBER_MOTOR, MotorType.kBrushless);
     private DigitalInput camLimitSwitch = new DigitalInput(RobotMap.CAM_LIMIT_SWITCH);
 
-    public void rotateCW() {
+    public void rotateCW()
+    {
         motor.set(1);
     }
 
-    public void rotateCCW() {
+    public void rotateCCW()
+    {
         motor.set(-1);
     }
 
-    public void stopMotor() {
+    public void stopMotor()
+    {
         motor.stopMotor();
     }
 
-    public boolean isCamInBackPosition() {
+    public boolean isCamInBackPosition()
+    {
         return camLimitSwitch.get();
     }
 
     @Override
-    protected void initDefaultCommand() {
+    protected void initDefaultCommand()
+    {
 
     }
 }

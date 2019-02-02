@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.TeleDrive;
 
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends Subsystem
+{
     private final CANSparkMax frontLeftMotor = new CANSparkMax(RobotMap.FRONT_LEFT_MOTOR, MotorType.kBrushless);
     private final CANSparkMax frontRightMotor = new CANSparkMax(RobotMap.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
     private final CANSparkMax backLeftMotor = new CANSparkMax(RobotMap.BACK_LEFT_MOTOR, MotorType.kBrushless);
@@ -16,7 +17,8 @@ public class DriveTrain extends Subsystem {
 
     private final DifferentialDrive differentialDrive;
 
-    public DriveTrain() {
+    public DriveTrain()
+    {
         super();
 
         backRightMotor.follow(frontRightMotor);
@@ -25,24 +27,29 @@ public class DriveTrain extends Subsystem {
         differentialDrive = new DifferentialDrive(frontLeftMotor, frontRightMotor);
     }
 
-    public void tankDrive(double leftSpeed, double rightSpeed) {
+    public void tankDrive(double leftSpeed, double rightSpeed)
+    {
         differentialDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
-    public void arcadeDrive(double xSpeed, double zRotation) {
+    public void arcadeDrive(double xSpeed, double zRotation)
+    {
         differentialDrive.arcadeDrive(xSpeed, zRotation);
     }
 
-    public void curvatureDrive(double xSpeed, double zRotation, boolean isQuickTurn) {
+    public void curvatureDrive(double xSpeed, double zRotation, boolean isQuickTurn)
+    {
         differentialDrive.curvatureDrive(xSpeed, zRotation, isQuickTurn);
     }
 
-    public void stopMotor() {
+    public void stopMotor()
+    {
         differentialDrive.stopMotor();
     }
 
     @Override
-    public void close() {
+    public void close()
+    {
         frontLeftMotor.close();
         frontRightMotor.close();
         backLeftMotor.close();
@@ -51,7 +58,8 @@ public class DriveTrain extends Subsystem {
     }
 
     @Override
-    protected void initDefaultCommand() {
+    protected void initDefaultCommand()
+    {
         setDefaultCommand(new TeleDrive());
     }
 }
