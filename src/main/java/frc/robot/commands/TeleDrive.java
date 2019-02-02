@@ -7,6 +7,11 @@ import frc.robot.Robot;
 
 public class TeleDrive extends Command
 {
+    public TeleDrive()
+    {
+        super(Robot.driveTrain);
+    }
+
     @Override
     protected void execute()
     {

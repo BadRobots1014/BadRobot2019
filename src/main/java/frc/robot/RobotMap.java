@@ -5,7 +5,7 @@ public class RobotMap
   /**
    * Drivetrain Motors
    */
-  public static int FRONT_LEFT_MOTOR = 0;
+  public static int FRONT_LEFT_MOTOR = 4;
   public static int FRONT_RIGHT_MOTOR = 1;
   public static int BACK_LEFT_MOTOR = 2;
   public static int BACK_RIGHT_MOTOR = 3;
