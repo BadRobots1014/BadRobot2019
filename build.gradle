@@ -54,6 +54,7 @@ dependencies {
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
     testCompile 'junit:junit:4.12'
     compile "com.github.dominikWin:badlog:316a7682bc890eb5c0d1df531f60f867dcdeec01"
+    compile fileTree(dir: 'lib', include: '*.jar')
 }
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
