@@ -8,7 +8,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.CloseClaw;
+import frc.robot.commands.DriveStraight;
+import frc.robot.commands.OpenClaw;
+import frc.robot.utils.CustomJoystick;
+import frc.robot.utils.CustomXboxController;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -44,7 +48,14 @@ public class OI
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  public static XboxController xboxController = new XboxController(0);
+  public static final CustomXboxController xboxController = new CustomXboxController(0);
+  public static final CustomJoystick joystick = new CustomJoystick(1);
 
-  public static Joystick joystick = new Joystick(1);
+  static
+  {
+    xboxController.aButton.whileHeld(new DriveStraight());
+
+    joystick.frontLeftButton.whileHeld(new OpenClaw());
+    joystick.backleftButton.whileHeld(new CloseClaw());
+  }
 }
