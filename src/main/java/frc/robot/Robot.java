@@ -11,6 +11,7 @@ import badlog.lib.BadLog;
 import badlog.lib.DataInferMode;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Lifter;
 import frc.robot.subsystems.Grabber;
@@ -27,14 +28,17 @@ public class Robot extends TimedRobot
   public static DriveTrain driveTrain = new DriveTrain();
   public static Lifter lifter = new Lifter();
   public static Grabber grabber = new Grabber();
+  public static Claw claw = new Claw();
 
   @Override
   public void robotInit()
   {
     // BadLog log = BadLog.init("test.bag");
     // BadLog.createValue("Example Value", System.getProperty("os.version"));
-    // BadLog.createTopic("Example Topic", "Bytes", () -> (double) Runtime.getRuntime().freeMemory());
-    // BadLog.createTopic("Topic with attributes", BadLog.UNITLESS, () -> 3.2, "attr1", "attr2");
+    // BadLog.createTopic("Example Topic", "Bytes", () -> (double)
+    // Runtime.getRuntime().freeMemory());
+    // BadLog.createTopic("Topic with attributes", BadLog.UNITLESS, () -> 3.2,
+    // "attr1", "attr2");
     // BadLog.createTopicSubscriber("Subscribed topic", "s", DataInferMode.DEFAULT);
     // log.finishInitialization();
   }
