@@ -1,33 +1,33 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.utils.MiniPID;
+import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.Robot;
-import frc.robot.utils.MathUtils;
 
-public class SetLifterHeight extends Command
+public class SetLifterHeight extends PIDCommand
 {
-    private MiniPID pid;
-    private double requestedHeight;
-
     public SetLifterHeight(double height)
     {
-        super(Robot.lifter);
-        pid = new MiniPID(1, 1, 1);
-        pid.setSetpoint(height);
-        requestedHeight = height;
+        super(1, 1, 1, Robot.lifter);
+        setSetpoint(height);
+        getPIDController().setPercentTolerance(5);
     }
 
     @Override
-    protected void execute()
+    protected double returnPIDInput()
     {
-        Robot.lifter.setSpeed(pid.getOutput(Robot.lifter.getHeight()));
+        return Robot.lifter.getHeight();
+    }
+
+    @Override
+    protected void usePIDOutput(double output)
+    {
+        Robot.lifter.setSpeed(output);
     }
 
     @Override
     protected boolean isFinished()
     {
-        return MathUtils.isWithinThreshold(Robot.lifter.getHeight(), requestedHeight, 0.01);
+        return getPIDController().onTarget();
     }
 
     @Override
