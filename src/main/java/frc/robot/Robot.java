@@ -7,8 +7,8 @@
 
 package frc.robot;
 
-import badlog.lib.BadLog;
-import badlog.lib.DataInferMode;
+// import badlog.lib.BadLog;
+// import badlog.lib.DataInferMode;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.Claw;

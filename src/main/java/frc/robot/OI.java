@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.CloseClaw;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.OpenClaw;
