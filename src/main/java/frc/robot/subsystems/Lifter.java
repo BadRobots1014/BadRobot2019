@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.TeleLift;
 
 public class Lifter extends Subsystem
 {
@@ -41,6 +42,6 @@ public class Lifter extends Subsystem
     @Override
     protected void initDefaultCommand()
     {
-
+        setDefaultCommand(new TeleLift());
     }
 }
