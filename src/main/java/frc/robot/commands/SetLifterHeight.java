@@ -9,7 +9,7 @@ public class SetLifterHeight extends PIDCommand
     {
         super(1, 1, 1, Robot.lifter);
         setSetpoint(height);
-        getPIDController().setPercentTolerance(5);
+        getPIDController().setPercentTolerance(5); // TODO tweak tolerance
     }
 
     @Override
@@ -28,17 +28,5 @@ public class SetLifterHeight extends PIDCommand
     protected boolean isFinished()
     {
         return getPIDController().onTarget();
-    }
-
-    @Override
-    protected void end()
-    {
-        Robot.lifter.stopMotor();
-    }
-
-    @Override
-    protected void interrupted()
-    {
-        end();
     }
 }

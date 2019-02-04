@@ -17,7 +17,8 @@ public class CANTalonSRX extends TalonSRX implements SpeedController
     @Override
     public void pidWrite(double output)
     {
-
+        // TODO this may be wrong
+        set(output);
     }
 
     @Override
