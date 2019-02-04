@@ -7,7 +7,7 @@ public class RotateGrabberCCW extends Command
 {
     public RotateGrabberCCW()
     {
-        super(2, Robot.grabber);
+        super(Robot.grabber);
     }
 
     @Override
