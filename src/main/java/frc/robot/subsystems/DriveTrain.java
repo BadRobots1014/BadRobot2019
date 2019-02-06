@@ -1,8 +1,11 @@
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
@@ -10,10 +13,11 @@ import frc.robot.commands.TeleDrive;
 
 public class DriveTrain extends Subsystem
 {
-    private final CANSparkMax frontLeftMotor = new CANSparkMax(RobotMap.FRONT_LEFT_MOTOR, MotorType.kBrushless);
-    private final CANSparkMax frontRightMotor = new CANSparkMax(RobotMap.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
-    private final CANSparkMax backLeftMotor = new CANSparkMax(RobotMap.BACK_LEFT_MOTOR, MotorType.kBrushless);
-    private final CANSparkMax backRightMotor = new CANSparkMax(RobotMap.BACK_RIGHT_MOTOR, MotorType.kBrushless);
+    private final CANSparkMax frontLeftMotor;
+    private final CANSparkMax frontRightMotor;
+    private final CANSparkMax backLeftMotor;
+    private final CANSparkMax backRightMotor;
+    private final AHRS navx;
 
     private final DifferentialDrive differentialDrive;
 
@@ -21,8 +25,22 @@ public class DriveTrain extends Subsystem
     {
         super();
 
-        backRightMotor.follow(frontRightMotor);
+        frontLeftMotor = new CANSparkMax(RobotMap.FRONT_LEFT_MOTOR, MotorType.kBrushless);
+        frontRightMotor = new CANSparkMax(RobotMap.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
+        backLeftMotor = new CANSparkMax(RobotMap.BACK_LEFT_MOTOR, MotorType.kBrushless);
+        backRightMotor = new CANSparkMax(RobotMap.BACK_RIGHT_MOTOR, MotorType.kBrushless);
+        navx = new AHRS(SPI.Port.kMXP);
+
+        frontLeftMotor.setIdleMode(IdleMode.kCoast);
+        frontRightMotor.setIdleMode(IdleMode.kCoast);
+        backLeftMotor.setIdleMode(IdleMode.kCoast);
+        backRightMotor.setIdleMode(IdleMode.kCoast);
+
+        frontLeftMotor.setInverted(true);
+        frontRightMotor.setInverted(true);
+
         backLeftMotor.follow(frontLeftMotor);
+        backRightMotor.follow(frontRightMotor);
 
         differentialDrive = new DifferentialDrive(frontLeftMotor, frontRightMotor);
     }
@@ -40,6 +58,16 @@ public class DriveTrain extends Subsystem
     public void curvatureDrive(double xSpeed, double zRotation, boolean isQuickTurn)
     {
         differentialDrive.curvatureDrive(xSpeed, zRotation, isQuickTurn);
+    }
+
+    public double getAngle()
+    {
+        return navx.getAngle();
+    }
+
+    public double getDisplacement()
+    {
+        return navx.getDisplacementX();
     }
 
     public void stopMotor()
