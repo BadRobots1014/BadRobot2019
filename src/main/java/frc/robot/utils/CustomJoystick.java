@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class CustomJoystick extends Joystick
 {
-    public final JoystickButton trigger = new JoystickButton(this, 2);
+    public final JoystickButton trigger = new JoystickButton(this, 1);
 
     public final JoystickButton sideThumbButton = new JoystickButton(this, 2);
 
@@ -20,8 +20,6 @@ public class CustomJoystick extends Joystick
     public final JoystickButton button10 = new JoystickButton(this, 10);
     public final JoystickButton button11 = new JoystickButton(this, 11);
     public final JoystickButton button12 = new JoystickButton(this, 12);
-
-    // TODO declare side buttons here
 
     public CustomJoystick(int port)
     {
