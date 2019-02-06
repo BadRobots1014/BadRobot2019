@@ -1,45 +1,74 @@
 package frc.robot.commands;
 
-import com.kauailabs.navx.frc.AHRS;
-
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.command.PIDCommand;
-import frc.robot.OI;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.utils.SimplePIDSource;
 
-public class DriveStraight extends PIDCommand
+public class DriveStraight extends Command
 {
-    private AHRS navx;
+    private final PIDController angularContoller;
+    private final PIDController linearContoller;
+    private double angularOutput;
+    private double linearOutput;
 
     public DriveStraight()
     {
-        super(1, 1, 1, Robot.driveTrain);
-        navx = new AHRS(SPI.Port.kMXP);
+        super(Robot.driveTrain);
+        angularContoller = new PIDController(1, 1, 1, new SimplePIDSource(this::getCurrAngle), this::setAngularOutput);
+        linearContoller = new PIDController(1, 1, 1, new SimplePIDSource(this::getCurrDisplacement),
+                this::setLinearOutput);
     }
 
     @Override
     protected void initialize()
     {
-        setSetpoint(navx.getAngle());
+        angularContoller.enable();
+        linearContoller.enable();
     }
 
     @Override
-    protected double returnPIDInput()
+    protected void execute()
     {
-        return navx.getAngle();
+        Robot.driveTrain.tankDrive(linearOutput + angularOutput, linearOutput - angularOutput);
     }
 
-    @Override
-    protected void usePIDOutput(double output)
+    private double getCurrAngle()
     {
-        double speed = OI.xboxController.getY(Hand.kLeft);
-        Robot.driveTrain.tankDrive(speed + output, speed - output);
+        return Robot.driveTrain.getAngle();
+    }
+
+    private double getCurrDisplacement()
+    {
+        return Robot.driveTrain.getDisplacement();
+    }
+
+    private void setAngularOutput(double angularOutput)
+    {
+        this.angularOutput = angularOutput;
+    }
+
+    private void setLinearOutput(double linearOutput)
+    {
+        this.linearOutput = linearOutput;
     }
 
     @Override
     protected boolean isFinished()
     {
         return false;
+    }
+
+    @Override
+    protected void end()
+    {
+        angularContoller.reset();
+        linearContoller.reset();
+    }
+
+    @Override
+    protected void interrupted()
+    {
+        end();
     }
 }
