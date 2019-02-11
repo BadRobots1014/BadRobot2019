@@ -75,6 +75,12 @@ public class DriveTrain extends Subsystem
         differentialDrive.stopMotor();
     }
 
+    public void reverseMotor()
+    {
+        frontLeftMotor.setInverted(!frontLeftMotor.getInverted());
+        frontRightMotor.setInverted(!frontRightMotor.getInverted());
+    }
+
     @Override
     public void close()
     {
