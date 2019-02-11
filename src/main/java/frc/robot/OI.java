@@ -8,7 +8,8 @@
 package frc.robot;
 
 import frc.robot.commands.CloseClaw;
-import frc.robot.commands.DriveStraight;
+import frc.robot.commands.TeleDriveStraight;
+import frc.robot.commands.TeleTurnInPlace;
 import frc.robot.commands.OpenClaw;
 import frc.robot.utils.CustomJoystick;
 import frc.robot.utils.CustomXboxController;
@@ -52,9 +53,10 @@ public class OI
 
   static
   {
-    xboxController.aButton.whileHeld(new DriveStraight());
+    xboxController.xButton.whileHeld(new TeleDriveStraight());
+    xboxController.yButton.whileHeld(new TeleTurnInPlace());
 
-    joystick.frontLeftButton.whileHeld(new OpenClaw());
-    joystick.backleftButton.whileHeld(new CloseClaw());
+    // joystick.frontLeftButton.whileHeld(new OpenClaw());
+    // joystick.backleftButton.whileHeld(new CloseClaw());
   }
 }
