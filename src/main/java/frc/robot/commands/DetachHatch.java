@@ -1,27 +1,9 @@
 package frc.robot.commands;
 
-import frc.robot.Robot;
-
-public class DetachHatch extends RotateGrabberCW
+public class DetachHatch extends RotateGrabberXTimes
 {
-    private boolean hasPassedLimitSwitch;
-
-    @Override
-    protected void initialize()
+    public DetachHatch()
     {
-        hasPassedLimitSwitch = false;
-    }
-
-    @Override
-    protected void execute()
-    {
-        if (!Robot.grabber.isCamInBackPosition())
-            hasPassedLimitSwitch = true;
-    }
-
-    @Override
-    protected boolean isFinished()
-    {
-        return hasPassedLimitSwitch && Robot.grabber.isCamInBackPosition();
+        super(5);
     }
 }

@@ -1,18 +1,20 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.CANTalonSRX;
 import frc.robot.RobotMap;
 import frc.robot.commands.TeleGrab;
 
 public class Grabber extends Subsystem
 {
-    private SpeedController motor = new CANSparkMax(RobotMap.GRABBER_MOTOR, MotorType.kBrushless);
-    private DigitalInput camLimitSwitch = new DigitalInput(RobotMap.CAM_LIMIT_SWITCH);
+    private CANTalonSRX motor;
+
+    public Grabber()
+    {
+        super();
+        motor = new CANTalonSRX(RobotMap.GRABBER_MOTOR);
+        motor.setInverted(true);
+    }
 
     public void rotate(double speed)
     {
@@ -36,7 +38,7 @@ public class Grabber extends Subsystem
 
     public boolean isCamInBackPosition()
     {
-        return camLimitSwitch.get();
+        return motor.getSensorCollection().isFwdLimitSwitchClosed();
     }
 
     @Override

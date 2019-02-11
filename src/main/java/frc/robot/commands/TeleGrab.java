@@ -16,7 +16,9 @@ public class TeleGrab extends Command
     protected void execute()
     {
         double rightTrigger = OI.xboxController.getTriggerAxis(Hand.kRight);
+        rightTrigger *= rightTrigger;
         double leftTrigger = OI.xboxController.getTriggerAxis(Hand.kLeft);
+        leftTrigger *= leftTrigger;
 
         if (rightTrigger > 0.05)
             Robot.grabber.rotate(rightTrigger);
