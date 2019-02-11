@@ -2,11 +2,16 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.CANTalonSRX;
-import frc.robot.RobotMap;
 
 public class Claw extends Subsystem
 {
-    private final CANTalonSRX clawMotor = new CANTalonSRX(RobotMap.CLAW_MOTOR);
+    private CANTalonSRX clawMotor;
+
+    public Claw()
+    {
+        super();
+        // TODO clawMotor = new CANTalonSRX(RobotMap.CLAW_MOTOR);
+    }
 
     public void open()
     {
