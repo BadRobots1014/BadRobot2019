@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.tele;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.PIDCommand;

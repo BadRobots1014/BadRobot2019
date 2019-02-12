@@ -4,49 +4,47 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.CANTalonSRX;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.tele.TeleBackHatchCam;
 
-public class BackHatchCam extends Subsystem
+public class Grabber extends Subsystem
 {
     private final Robot robot;
-    private final CANTalonSRX motor;
+    private CANTalonSRX grabberMotor;
 
-    public BackHatchCam(Robot robot)
+    public Grabber(Robot robot)
     {
         super();
         this.robot = robot;
-        motor = new CANTalonSRX(RobotMap.CAM_MOTOR);
-        motor.setInverted(true);
+        grabberMotor = new CANTalonSRX(RobotMap.GRABBER_MOTOR);
     }
 
     public void rotate(double speed)
     {
-        motor.set(speed);
+        grabberMotor.set(speed);
     }
 
     public void rotateCW()
     {
-        motor.set(1);
+        grabberMotor.set(1);
     }
 
     public void rotateCCW()
     {
-        motor.set(-1);
+        grabberMotor.set(-1);
     }
 
     public void stopMotor()
     {
-        motor.stopMotor();
+        grabberMotor.stopMotor();
     }
 
     public boolean isCamInBackPosition()
     {
-        return motor.getSensorCollection().isFwdLimitSwitchClosed();
+        return grabberMotor.getSensorCollection().isFwdLimitSwitchClosed();
     }
 
     @Override
     protected void initDefaultCommand()
     {
-        setDefaultCommand(new TeleBackHatchCam(this, robot.oi.xboxController));
+        // TODO setDefaultCommand(new TeleGrab(robot.backHatchCam, robot.oi.xboxController));
     }
 }

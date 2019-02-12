@@ -7,11 +7,11 @@
 
 package frc.robot;
 
-import frc.robot.commands.CloseClaw;
-import frc.robot.commands.TeleDriveStraight;
-import frc.robot.commands.TeleTurnInPlace;
-import frc.robot.commands.OpenClaw;
+import frc.robot.commands.tele.TeleDriveStraight;
+import frc.robot.commands.tele.TeleTurnInPlace;
 import frc.robot.commands.ReverseDriveTrain;
+import frc.robot.commands.RotateGrabberCCW;
+import frc.robot.commands.RotateGrabberCW;
 import frc.robot.utils.CustomJoystick;
 import frc.robot.utils.CustomXboxController;
 
@@ -49,13 +49,18 @@ public class OI
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  public final CustomXboxController xboxController = new CustomXboxController(0);
-  public final CustomJoystick joystick = new CustomJoystick(1);
+  public final CustomXboxController xboxController;
+  public final CustomJoystick joystick;
 
   public OI(Robot robot)
   {
+    xboxController = new CustomXboxController(0);
     xboxController.xButton.whileHeld(new TeleDriveStraight(robot.driveTrain, this.xboxController));
     xboxController.yButton.whileHeld(new TeleTurnInPlace(robot.driveTrain, this.xboxController));
     xboxController.aButton.whenPressed(new ReverseDriveTrain(robot.driveTrain));
+
+    joystick = new CustomJoystick(1);
+    joystick.frontLeftButton.whileHeld(new RotateGrabberCW(robot.grabber));
+    joystick.trigger.whileHeld(new RotateGrabberCCW(robot.grabber));
   }
 }

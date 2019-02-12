@@ -1,17 +1,17 @@
 package frc.robot.commands;
 
-import frc.robot.subsystems.BackHatchCam;
+import frc.robot.subsystems.Grabber;
 
 public class RotateGrabberCCW extends RotateGrabberCW
 {
-    public RotateGrabberCCW(BackHatchCam backHatchCam)
+    public RotateGrabberCCW(Grabber grabber)
     {
-        super(backHatchCam);
+        super(grabber);
     }
 
     @Override
     protected void initialize()
     {
-        backHatchCam.rotateCCW();
+        grabber.rotateCCW();
     }
 }

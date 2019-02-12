@@ -13,13 +13,17 @@ public class DriveStraight extends Command
     private double angularOutput;
     private double linearOutput;
 
-    public DriveStraight(DriveTrain driveTrain)
+    public DriveStraight(DriveTrain driveTrain, double distance_m)
     {
         super(driveTrain);
         this.driveTrain = driveTrain;
+
         angularContoller = new PIDController(1, 1, 1, new SimplePIDSource(this::getCurrAngle), this::setAngularOutput);
+        angularContoller.setSetpoint(getCurrAngle());
+
         linearContoller = new PIDController(1, 1, 1, new SimplePIDSource(this::getCurrDisplacement),
                 this::setLinearOutput);
+        linearContoller.setSetpoint(getCurrDisplacement() + distance_m);
     }
 
     @Override

@@ -1,16 +1,16 @@
-package frc.robot.commands;
+package frc.robot.commands.tele;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.BackHatchCam;
 import frc.robot.utils.CustomXboxController;
 
-public class TeleGrab extends Command
+public class TeleBackHatchCam extends Command
 {
     protected final BackHatchCam backHatchCam;
     protected final CustomXboxController xboxController;
 
-    public TeleGrab(BackHatchCam backHatchCam, CustomXboxController xboxController)
+    public TeleBackHatchCam(BackHatchCam backHatchCam, CustomXboxController xboxController)
     {
         super(backHatchCam);
         this.backHatchCam = backHatchCam;

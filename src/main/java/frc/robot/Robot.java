@@ -11,7 +11,7 @@ import badlog.lib.BadLog;
 import badlog.lib.DataInferMode;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Lifter;
 import frc.robot.utils.CameraProcessingThread;
@@ -28,8 +28,8 @@ public class Robot extends TimedRobot
 {
   public final DriveTrain driveTrain = new DriveTrain(this);
   public final Lifter lifter = new Lifter(this);
-  public final BackHatchCam grabber = new BackHatchCam(this);
-  public final Claw claw = new Claw(this);
+  public final BackHatchCam backHatchCam = new BackHatchCam(this);
+  public final Grabber grabber = new Grabber(this);
   public final OI oi = new OI(this);
   private final CameraProcessingThread cameraProcessingThread = new CameraProcessingThread();
   // public final LightDriveCAN lightDriveCAN = new LightDriveCAN(10);

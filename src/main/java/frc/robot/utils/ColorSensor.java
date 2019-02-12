@@ -85,8 +85,8 @@ public class ColorSensor
         return buffy.get(0);
     }
 
-    public void free()
+    public void close()
     {
-        sensor.free();
+        sensor.close();
     }
 }

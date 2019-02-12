@@ -1,11 +1,12 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.subsystems.BackHatchCam;
 
-public class DetachBackHatch extends RotateBackHatchCamXTimes
+public class DetachBackHatch extends TimedCommand
 {
     public DetachBackHatch(BackHatchCam backHatchCam)
     {
-        super(backHatchCam, 5);
+        super(5, backHatchCam);
     }
 }

@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.CANTalonSRX;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.TeleLift;
+import frc.robot.commands.tele.TeleLift;
 
 public class Lifter extends Subsystem
 {

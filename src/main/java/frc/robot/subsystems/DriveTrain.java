@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.TeleDrive;
+import frc.robot.commands.tele.TeleDrive;
 
 public class DriveTrain extends Subsystem
 {
@@ -97,6 +97,6 @@ public class DriveTrain extends Subsystem
     @Override
     protected void initDefaultCommand()
     {
-        setDefaultCommand(new TeleDrive(robot.driveTrain, robot.oi.xboxController));
+        setDefaultCommand(new TeleDrive(this, robot.oi.xboxController));
     }
 }
