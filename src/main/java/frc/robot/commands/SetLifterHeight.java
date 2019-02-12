@@ -1,13 +1,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.PIDCommand;
-import frc.robot.Robot;
+import frc.robot.subsystems.Lifter;
 
 public class SetLifterHeight extends PIDCommand
 {
-    public SetLifterHeight(double height)
+    protected final Lifter lifter;
+
+    public SetLifterHeight(Lifter lifter, double height)
     {
-        super(1, 1, 1, Robot.lifter);
+        super(1, 1, 1, lifter);
+        this.lifter = lifter;
         setSetpoint(height);
         getPIDController().setPercentTolerance(5); // TODO tweak tolerance
     }
@@ -15,13 +18,13 @@ public class SetLifterHeight extends PIDCommand
     @Override
     protected double returnPIDInput()
     {
-        return Robot.lifter.getHeight();
+        return lifter.getHeight();
     }
 
     @Override
     protected void usePIDOutput(double output)
     {
-        Robot.lifter.setSpeed(output);
+        lifter.setSpeed(output);
     }
 
     @Override

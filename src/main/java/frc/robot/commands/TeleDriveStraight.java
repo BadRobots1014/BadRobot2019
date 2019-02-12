@@ -2,34 +2,39 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.PIDCommand;
-import frc.robot.OI;
-import frc.robot.Robot;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.utils.CustomXboxController;
 
 public class TeleDriveStraight extends PIDCommand
 {
-    public TeleDriveStraight()
+    protected final DriveTrain driveTrain;
+    protected final CustomXboxController xboxController;
+
+    public TeleDriveStraight(DriveTrain driveTrain, CustomXboxController xboxController)
     {
-        super(1, 1, 1, Robot.driveTrain);
+        super(1, 1, 1, driveTrain);
+        this.driveTrain = driveTrain;
+        this.xboxController = xboxController;
     }
 
     @Override
     protected void initialize()
     {
-        setSetpoint(Robot.driveTrain.getAngle());
+        setSetpoint(driveTrain.getAngle());
     }
 
     @Override
     protected double returnPIDInput()
     {
-        return Robot.driveTrain.getAngle();
+        return driveTrain.getAngle();
     }
 
     @Override
     protected void usePIDOutput(double output)
     {
-        double speed = OI.xboxController.getY(Hand.kLeft);
+        double speed = xboxController.getY(Hand.kLeft);
         // Robot.driveTrain.tankDrive(speed + output, speed - output);
-        Robot.driveTrain.tankDrive(speed, speed);
+        driveTrain.tankDrive(speed, speed);
     }
 
     @Override

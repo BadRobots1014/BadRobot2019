@@ -2,21 +2,26 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
-import frc.robot.Robot;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.utils.CustomXboxController;
 
 public class TeleTurnInPlace extends Command
 {
-    public TeleTurnInPlace()
+    protected final DriveTrain driveTrain;
+    protected final CustomXboxController xboxController;
+
+    public TeleTurnInPlace(DriveTrain driveTrain, CustomXboxController xboxController)
     {
-        super(Robot.driveTrain);
+        super(driveTrain);
+        this.driveTrain = driveTrain;
+        this.xboxController = xboxController;
     }
 
     @Override
     protected void execute()
     {
-        double speed = OI.xboxController.getX(Hand.kLeft);
-        Robot.driveTrain.tankDrive(speed, -speed);
+        double speed = xboxController.getX(Hand.kLeft);
+        driveTrain.tankDrive(speed, -speed);
     }
 
     @Override
@@ -28,7 +33,7 @@ public class TeleTurnInPlace extends Command
     @Override
     protected void end()
     {
-        Robot.driveTrain.stopMotor();
+        driveTrain.stopMotor();
     }
 
     @Override

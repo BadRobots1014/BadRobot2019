@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.CANTalonSRX;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.TeleLift;
 
@@ -9,15 +10,18 @@ public class Lifter extends Subsystem
 {
     private static final double ROTATIONS_PER_METER = 10; // TODO find this
 
-    private CANTalonSRX lifterMotor;
-    private CANTalonSRX lifterMotor2;
+    private final Robot robot;
 
-    public Lifter()
+    private final CANTalonSRX lifterMotor1;
+    private final CANTalonSRX lifterMotor2;
+
+    public Lifter(Robot robot)
     {
         super();
-        lifterMotor = new CANTalonSRX(RobotMap.LIFTER_MOTOR_1);
+        this.robot = robot;
+        lifterMotor1 = new CANTalonSRX(RobotMap.LIFTER_MOTOR_1);
         lifterMotor2 = new CANTalonSRX(RobotMap.LIFTER_MOTOR_2);
-        lifterMotor2.follow(lifterMotor);
+        lifterMotor2.follow(lifterMotor1);
         lifterMotor2.setInverted(true);
     }
 
@@ -39,17 +43,17 @@ public class Lifter extends Subsystem
 
     public void setSpeed(double speed)
     {
-        lifterMotor.set(speed);
+        lifterMotor1.set(speed);
     }
 
     public void stopMotor()
     {
-        lifterMotor.stopMotor();
+        lifterMotor1.stopMotor();
     }
 
     @Override
     protected void initDefaultCommand()
     {
-        setDefaultCommand(new TeleLift());
+        setDefaultCommand(new TeleLift(robot.lifter, robot.oi.joystick));
     }
 }

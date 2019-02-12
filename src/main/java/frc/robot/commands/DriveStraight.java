@@ -2,19 +2,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.utils.SimplePIDSource;
 
 public class DriveStraight extends Command
 {
+    protected final DriveTrain driveTrain;
     private final PIDController angularContoller;
     private final PIDController linearContoller;
     private double angularOutput;
     private double linearOutput;
 
-    public DriveStraight()
+    public DriveStraight(DriveTrain driveTrain)
     {
-        super(Robot.driveTrain);
+        super(driveTrain);
+        this.driveTrain = driveTrain;
         angularContoller = new PIDController(1, 1, 1, new SimplePIDSource(this::getCurrAngle), this::setAngularOutput);
         linearContoller = new PIDController(1, 1, 1, new SimplePIDSource(this::getCurrDisplacement),
                 this::setLinearOutput);
@@ -30,17 +32,17 @@ public class DriveStraight extends Command
     @Override
     protected void execute()
     {
-        Robot.driveTrain.tankDrive(linearOutput + angularOutput, linearOutput - angularOutput);
+        driveTrain.tankDrive(linearOutput + angularOutput, linearOutput - angularOutput);
     }
 
     private double getCurrAngle()
     {
-        return Robot.driveTrain.getAngle();
+        return driveTrain.getAngle();
     }
 
     private double getCurrDisplacement()
     {
-        return Robot.driveTrain.getDisplacement();
+        return driveTrain.getDisplacement();
     }
 
     private void setAngularOutput(double angularOutput)

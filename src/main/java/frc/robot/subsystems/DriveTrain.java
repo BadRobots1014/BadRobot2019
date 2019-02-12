@@ -8,11 +8,13 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.TeleDrive;
 
 public class DriveTrain extends Subsystem
 {
+    private final Robot robot;
     private final CANSparkMax frontLeftMotor;
     private final CANSparkMax frontRightMotor;
     private final CANSparkMax backLeftMotor;
@@ -21,10 +23,11 @@ public class DriveTrain extends Subsystem
 
     private final DifferentialDrive differentialDrive;
 
-    public DriveTrain()
+    public DriveTrain(Robot robot)
     {
         super();
 
+        this.robot = robot;
         frontLeftMotor = new CANSparkMax(RobotMap.FRONT_LEFT_MOTOR, MotorType.kBrushless);
         frontRightMotor = new CANSparkMax(RobotMap.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
         backLeftMotor = new CANSparkMax(RobotMap.BACK_LEFT_MOTOR, MotorType.kBrushless);
@@ -94,6 +97,6 @@ public class DriveTrain extends Subsystem
     @Override
     protected void initDefaultCommand()
     {
-        setDefaultCommand(new TeleDrive());
+        setDefaultCommand(new TeleDrive(robot.driveTrain, robot.oi.xboxController));
     }
 }

@@ -1,36 +1,17 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import frc.robot.subsystems.BackHatchCam;
 
-public class RotateGrabberCCW extends Command
+public class RotateGrabberCCW extends RotateGrabberCW
 {
-    public RotateGrabberCCW()
+    public RotateGrabberCCW(BackHatchCam backHatchCam)
     {
-        super(Robot.grabber);
+        super(backHatchCam);
     }
 
     @Override
     protected void initialize()
     {
-        Robot.grabber.rotateCCW();
-    }
-
-    @Override
-    protected boolean isFinished()
-    {
-        return false;
-    }
-
-    @Override
-    protected void end()
-    {
-        Robot.grabber.stopMotor();
-    }
-
-    @Override
-    protected void interrupted()
-    {
-        end();
+        backHatchCam.rotateCCW();
     }
 }

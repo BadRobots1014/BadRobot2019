@@ -2,16 +2,19 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.CANTalonSRX;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.TeleGrab;
 
-public class Grabber extends Subsystem
+public class BackHatchCam extends Subsystem
 {
-    private CANTalonSRX motor;
+    private final Robot robot;
+    private final CANTalonSRX motor;
 
-    public Grabber()
+    public BackHatchCam(Robot robot)
     {
         super();
+        this.robot = robot;
         motor = new CANTalonSRX(RobotMap.GRABBER_MOTOR);
         motor.setInverted(true);
     }
@@ -44,6 +47,6 @@ public class Grabber extends Subsystem
     @Override
     protected void initDefaultCommand()
     {
-        setDefaultCommand(new TeleGrab());
+        setDefaultCommand(new TeleGrab(robot.grabber, robot.oi.xboxController));
     }
 }

@@ -1,20 +1,25 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
-import frc.robot.Robot;
+import frc.robot.subsystems.Lifter;
+import frc.robot.utils.CustomJoystick;
 
 public class TeleLift extends Command
 {
-    public TeleLift()
+    protected final Lifter lifter;
+    protected final CustomJoystick joystick;
+
+    public TeleLift(Lifter lifter, CustomJoystick joystick)
     {
-        super(Robot.lifter);
+        super(lifter);
+        this.lifter = lifter;
+        this.joystick = joystick;
     }
 
     @Override
     protected void execute()
     {
-        Robot.lifter.setSpeed(OI.joystick.getY());
+        lifter.setSpeed(joystick.getY());
     }
 
     @Override
@@ -26,7 +31,7 @@ public class TeleLift extends Command
     @Override
     protected void end()
     {
-        Robot.lifter.stopMotor();
+        lifter.stopMotor();
     }
 
     @Override

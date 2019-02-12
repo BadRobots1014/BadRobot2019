@@ -1,19 +1,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import frc.robot.subsystems.Claw;
 
 public class CloseClaw extends Command
 {
-    public CloseClaw()
+    protected final Claw claw;
+
+    public CloseClaw(Claw claw)
     {
-        super(Robot.claw);
+        super(claw);
+        this.claw = claw;
     }
 
     @Override
     protected void execute()
     {
-        Robot.claw.close();
+        claw.close();
     }
 
     @Override

@@ -11,6 +11,7 @@ import frc.robot.commands.CloseClaw;
 import frc.robot.commands.TeleDriveStraight;
 import frc.robot.commands.TeleTurnInPlace;
 import frc.robot.commands.OpenClaw;
+import frc.robot.commands.ReverseDriveTrain;
 import frc.robot.utils.CustomJoystick;
 import frc.robot.utils.CustomXboxController;
 
@@ -48,15 +49,13 @@ public class OI
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  public static final CustomXboxController xboxController = new CustomXboxController(0);
-  public static final CustomJoystick joystick = new CustomJoystick(1);
+  public final CustomXboxController xboxController = new CustomXboxController(0);
+  public final CustomJoystick joystick = new CustomJoystick(1);
 
-  static
+  public OI(Robot robot)
   {
-    xboxController.xButton.whileHeld(new TeleDriveStraight());
-    xboxController.yButton.whileHeld(new TeleTurnInPlace());
-
-    // joystick.frontLeftButton.whileHeld(new OpenClaw());
-    // joystick.backleftButton.whileHeld(new CloseClaw());
+    xboxController.xButton.whileHeld(new TeleDriveStraight(robot.driveTrain, this.xboxController));
+    xboxController.yButton.whileHeld(new TeleTurnInPlace(robot.driveTrain, this.xboxController));
+    xboxController.aButton.whenPressed(new ReverseDriveTrain(robot.driveTrain));
   }
 }

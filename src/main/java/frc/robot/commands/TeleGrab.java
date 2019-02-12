@@ -2,30 +2,35 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
-import frc.robot.Robot;
+import frc.robot.subsystems.BackHatchCam;
+import frc.robot.utils.CustomXboxController;
 
 public class TeleGrab extends Command
 {
-    public TeleGrab()
+    protected final BackHatchCam backHatchCam;
+    protected final CustomXboxController xboxController;
+
+    public TeleGrab(BackHatchCam backHatchCam, CustomXboxController xboxController)
     {
-        super(Robot.grabber);
+        super(backHatchCam);
+        this.backHatchCam = backHatchCam;
+        this.xboxController = xboxController;
     }
 
     @Override
     protected void execute()
     {
-        double rightTrigger = OI.xboxController.getTriggerAxis(Hand.kRight);
+        double rightTrigger = xboxController.getTriggerAxis(Hand.kRight);
         rightTrigger *= rightTrigger;
-        double leftTrigger = OI.xboxController.getTriggerAxis(Hand.kLeft);
+        double leftTrigger = xboxController.getTriggerAxis(Hand.kLeft);
         leftTrigger *= leftTrigger;
 
         if (rightTrigger > 0.05)
-            Robot.grabber.rotate(rightTrigger);
+            backHatchCam.rotate(rightTrigger);
         else if (leftTrigger > 0.05)
-            Robot.grabber.rotate(-leftTrigger);
+            backHatchCam.rotate(-leftTrigger);
         else
-            Robot.grabber.stopMotor();
+            backHatchCam.stopMotor();
     }
 
     @Override
@@ -37,7 +42,7 @@ public class TeleGrab extends Command
     @Override
     protected void end()
     {
-        Robot.grabber.stopMotor();
+        backHatchCam.stopMotor();
     }
 
     @Override

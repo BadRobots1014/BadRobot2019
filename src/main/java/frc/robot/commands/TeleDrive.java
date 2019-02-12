@@ -2,23 +2,28 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
-import frc.robot.Robot;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.utils.CustomXboxController;
 
 public class TeleDrive extends Command
 {
-    public TeleDrive()
+    protected final DriveTrain driveTrain;
+    protected final CustomXboxController xboxController;
+
+    public TeleDrive(DriveTrain driveTrain, CustomXboxController xboxController)
     {
-        super(Robot.driveTrain);
+        super(driveTrain);
+        this.driveTrain = driveTrain;
+        this.xboxController = xboxController;
     }
 
     @Override
     protected void execute()
     {
         double left = 0, right = 0;
-        left = OI.xboxController.getY(Hand.kLeft);
-        right = OI.xboxController.getY(Hand.kRight);
-        Robot.driveTrain.tankDrive(left, right);
+        left = xboxController.getY(Hand.kLeft);
+        right = xboxController.getY(Hand.kRight);
+        driveTrain.tankDrive(left, right);
     }
 
     @Override
@@ -30,7 +35,7 @@ public class TeleDrive extends Command
     @Override
     protected void end()
     {
-        Robot.driveTrain.stopMotor();
+        driveTrain.stopMotor();
     }
 
     @Override

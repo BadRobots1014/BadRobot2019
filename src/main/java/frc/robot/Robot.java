@@ -15,7 +15,7 @@ import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Lifter;
 import frc.robot.utils.CameraProcessingThread;
-import frc.robot.subsystems.Grabber;
+import frc.robot.subsystems.BackHatchCam;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,12 +26,13 @@ import frc.robot.subsystems.Grabber;
  */
 public class Robot extends TimedRobot
 {
-  public static final DriveTrain driveTrain = new DriveTrain();
-  public static final Lifter lifter = new Lifter();
-  public static final Grabber grabber = new Grabber();
-  public static final Claw claw = new Claw();
-  private static final CameraProcessingThread cameraProcessingThread = new CameraProcessingThread();
-  // public static final LightDriveCAN lightDriveCAN = new LightDriveCAN(10);
+  public final DriveTrain driveTrain = new DriveTrain(this);
+  public final Lifter lifter = new Lifter(this);
+  public final BackHatchCam grabber = new BackHatchCam(this);
+  public final Claw claw = new Claw(this);
+  public final OI oi = new OI(this);
+  private final CameraProcessingThread cameraProcessingThread = new CameraProcessingThread();
+  // public final LightDriveCAN lightDriveCAN = new LightDriveCAN(10);
 
   @Override
   public void robotInit()
@@ -44,6 +45,8 @@ public class Robot extends TimedRobot
     BadLog.createTopic("Topic with attributes", BadLog.UNITLESS, () -> 3.2, "attr1", "attr2");
     BadLog.createTopicSubscriber("Subscribed topic", "s", DataInferMode.DEFAULT);
     log.finishInitialization();
+
+    // lightDriveCAN.SetColor(1, Color.BLUE);
   }
 
   /**
@@ -58,7 +61,7 @@ public class Robot extends TimedRobot
   @Override
   public void robotPeriodic()
   {
-    // lightDriveCAN.SetColor(1, Color.BLUE);
+
   }
 
   /**
