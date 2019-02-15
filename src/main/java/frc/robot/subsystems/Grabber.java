@@ -37,11 +37,6 @@ public class Grabber extends Subsystem
         grabberMotor.stopMotor();
     }
 
-    public boolean isCamInBackPosition()
-    {
-        return grabberMotor.getSensorCollection().isFwdLimitSwitchClosed();
-    }
-
     @Override
     protected void initDefaultCommand()
     {

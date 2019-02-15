@@ -23,6 +23,8 @@ public class DriveTrain extends Subsystem
 
     private final DifferentialDrive differentialDrive;
 
+    private boolean reversed;
+
     public DriveTrain(Robot robot)
     {
         super();
@@ -50,7 +52,10 @@ public class DriveTrain extends Subsystem
 
     public void tankDrive(double leftSpeed, double rightSpeed)
     {
-        differentialDrive.tankDrive(leftSpeed, rightSpeed);
+        if (reversed)
+            differentialDrive.tankDrive(-rightSpeed, -leftSpeed);
+        else
+            differentialDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
     public void arcadeDrive(double xSpeed, double zRotation)
@@ -78,12 +83,6 @@ public class DriveTrain extends Subsystem
         differentialDrive.stopMotor();
     }
 
-    public void reverseMotor()
-    {
-        frontLeftMotor.setInverted(!frontLeftMotor.getInverted());
-        frontRightMotor.setInverted(!frontRightMotor.getInverted());
-    }
-
     @Override
     public void close()
     {
@@ -98,5 +97,15 @@ public class DriveTrain extends Subsystem
     protected void initDefaultCommand()
     {
         setDefaultCommand(new TeleDrive(this, robot.oi.xboxController));
+    }
+
+    public boolean isReversed()
+    {
+        return reversed;
+    }
+
+    public void toggleReversed()
+    {
+        reversed = !reversed;
     }
 }

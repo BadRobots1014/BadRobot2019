@@ -33,7 +33,7 @@ public class CustomXboxController extends GenericHID
 
     /**
      * Get the trigger axis value of the controller.
-     * 
+     *
      * @param hand Side of controller whose value should be returned.
      * @return The trigger axis value of the controller.
      */

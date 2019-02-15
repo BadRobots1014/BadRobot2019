@@ -20,9 +20,8 @@ public class TeleDrive extends Command
     @Override
     protected void execute()
     {
-        double left = 0, right = 0;
-        left = xboxController.getY(Hand.kLeft);
-        right = xboxController.getY(Hand.kRight);
+        double left = xboxController.getY(Hand.kLeft);
+        double right = xboxController.getY(Hand.kRight);
         driveTrain.tankDrive(left, right);
     }
 

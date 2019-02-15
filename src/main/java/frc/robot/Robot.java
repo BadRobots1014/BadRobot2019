@@ -31,13 +31,13 @@ public class Robot extends TimedRobot
   public final BackHatchCam backHatchCam = new BackHatchCam(this);
   public final Grabber grabber = new Grabber(this);
   public final OI oi = new OI(this);
-  private final CameraProcessingThread cameraProcessingThread = new CameraProcessingThread();
+  // TODO private final CameraProcessingThread cameraProcessingThread = new CameraProcessingThread();
   // public final LightDriveCAN lightDriveCAN = new LightDriveCAN(10);
 
   @Override
   public void robotInit()
   {
-    cameraProcessingThread.start();
+    //TODO cameraProcessingThread.start();
 
     BadLog log = BadLog.init("/home/lvuser/test.bag");
     BadLog.createValue("Example Value", System.getProperty("os.version"));
@@ -72,6 +72,7 @@ public class Robot extends TimedRobot
   @Override
   public void disabledInit()
   {
+    // TODO cameraProcessingThread.stop();
   }
 
   @Override

@@ -19,7 +19,7 @@ public class TeleLift extends Command
     @Override
     protected void execute()
     {
-        lifter.setSpeed(joystick.getY());
+        lifter.setSpeed(-joystick.getY());
     }
 
     @Override

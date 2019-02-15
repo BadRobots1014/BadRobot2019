@@ -9,13 +9,12 @@ public class ReverseDriveTrain extends InstantCommand
 
     public ReverseDriveTrain(DriveTrain driveTrain)
     {
-        super(driveTrain);
         this.driveTrain = driveTrain;
     }
 
     @Override
     protected void execute()
     {
-        driveTrain.reverseMotor();
+        driveTrain.toggleReversed();
     }
 }
