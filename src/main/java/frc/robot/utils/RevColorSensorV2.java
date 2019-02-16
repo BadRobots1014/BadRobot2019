@@ -1,6 +1,5 @@
 package frc.robot.utils;
 
-import java.awt.Color;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -8,10 +7,10 @@ import edu.wpi.first.wpilibj.I2C;
 
 /**
  * Implementation of the RevRobotics Color Sensor V2
- * 
+ *
  * See http://www.revrobotics.com/content/docs/TMD3782_v2.pdf
  */
-public class RevColorSensorV2 implements AutoCloseable
+public class RevColorSensorV2 extends I2C implements AutoCloseable
 {
     /* ---------------------------- READ/WRITE ---------------------------- */
 
@@ -83,60 +82,71 @@ public class RevColorSensorV2 implements AutoCloseable
     /**
      * Instance Variables
      */
-    private final I2C i2c;
     private final ByteBuffer byteBuffer = ByteBuffer.allocate(8);
     private final double integrationTime = 10;
 
-    private short red;
-    private short green;
-    private short blue;
-    private short proximity;
-
     /**
      * Creates a new instance of a RevColorSensorV2 and prepares it for operation
-     * 
-     * @param i2c the I2C instance to use for communication
      */
-    public RevColorSensorV2(I2C i2c)
+    public RevColorSensorV2(Port port)
     {
+        super(port, 0x39);
         byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
-        this.i2c = i2c;
 
-        i2c.write(COMMAND | ENABLE, PON | AEN | PEN);
-        i2c.write(COMMAND | ATIME, (int) (256 - integrationTime / 2.38));
-        i2c.write(COMMAND | PPULSE, 0b1111);
+        init();
+    }
+
+    public void init()
+    {
+        write(COMMAND | ENABLE, PON | AEN | PEN);
+        write(COMMAND | ATIME, (int) (256 - integrationTime / 2.38));
+        write(COMMAND | PPULSE, 0b1111);
+        write(COMMAND | CONTROL, 0b0010_0010);
     }
 
     /**
      * Read the red, green, blue, and proximity values from the sensor
      */
-    public void readAll()
+    public short[] getRGBA()
     {
         byteBuffer.clear();
-        i2c.read(COMMAND | MULTI_BYTE_BIT | RDATA, 8, byteBuffer);
+        read(COMMAND | MULTI_BYTE_BIT | CDATA, 8, byteBuffer);
 
-        red = asUnsignedShort(byteBuffer.getShort(0));
-        green = asUnsignedShort(byteBuffer.getShort(2));
-        blue = asUnsignedShort(byteBuffer.getShort(4));
-        proximity = asUnsignedShort(byteBuffer.getShort(6));
+        short alpha = asUnsignedShort(byteBuffer.getShort(0));
+        short red = asUnsignedShort(byteBuffer.getShort(2));
+        short green = asUnsignedShort(byteBuffer.getShort(4));
+        short blue = asUnsignedShort(byteBuffer.getShort(6));
+
+        return new short[] { red, green, blue, alpha };
     }
 
-    /**
-     * @return the Color represented by the last RGB reading
-     */
-    public Color getColor()
+    public short getProximity()
     {
-        return new Color(red, green, blue);
+        return readShort(PDATA);
     }
 
-    public boolean isColorSimilarTo(Color a)
+    public byte getControl()
     {
-        Color b = getColor();
-        int dR = b.getRed() - a.getRed();
-        int dG = b.getGreen() - a.getGreen();
-        int dB = b.getBlue() - a.getBlue();
-        double delta = Math.sqrt((dR * dR) + (dG * dG) + (dB * dB));
-        return delta < 1000; // TODO magic number
+        return readByte(CONTROL);
+    }
+
+    public int getStatus()
+    {
+        return readByte(STATUS);
+    }
+
+    private byte readByte(int register)
+    {
+        byteBuffer.clear();
+        read(COMMAND | register, 1, byteBuffer);
+        return byteBuffer.get(0);
+    }
+
+    public short readShort(int register)
+    {
+        byteBuffer.clear();
+        read(COMMAND | MULTI_BYTE_BIT | register, 2, byteBuffer);
+        return asUnsignedShort(byteBuffer.getShort(0));
     }
 
     private short asUnsignedShort(short signedShort)
@@ -147,40 +157,8 @@ public class RevColorSensorV2 implements AutoCloseable
             return signedShort;
     }
 
-    public short getRed()
-    {
-        return red;
-    }
-
-    public short getGreen()
-    {
-        return green;
-    }
-
-    public short getBlue()
-    {
-        return blue;
-    }
-
-    public short getProximity()
-    {
-        return proximity;
-    }
-
-    /**
-     * Reads the current status of the sensor
-     * 
-     * @return the current value in the status register
-     */
-    public int getStatus()
-    {
-        byteBuffer.clear();
-        i2c.read(COMMAND | STATUS, 1, byteBuffer);
-        return byteBuffer.get(0);
-    }
-
     public void close()
     {
-        i2c.close();
+        close();
     }
 }

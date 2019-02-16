@@ -7,14 +7,21 @@
 
 package frc.robot;
 
+import java.util.Arrays;
+
 import badlog.lib.BadLog;
 import badlog.lib.DataInferMode;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Lifter;
+import frc.robot.subsystems.MulticolorSensor;
 import frc.robot.utils.CameraProcessingThread;
+import frc.robot.utils.AdafruitMultiplexer;
+import frc.robot.utils.RevColorSensorV2;
 import frc.robot.subsystems.BackHatchCam;
 
 /**
@@ -31,13 +38,15 @@ public class Robot extends TimedRobot
   public final BackHatchCam backHatchCam = new BackHatchCam(this);
   public final Grabber grabber = new Grabber(this);
   public final OI oi = new OI(this);
-  // TODO private final CameraProcessingThread cameraProcessingThread = new CameraProcessingThread();
+  // TODO private final CameraProcessingThread cameraProcessingThread = new
+  // CameraProcessingThread();
   // public final LightDriveCAN lightDriveCAN = new LightDriveCAN(10);
+  public final MulticolorSensor multicolorSensor = new MulticolorSensor();
 
   @Override
   public void robotInit()
   {
-    //TODO cameraProcessingThread.start();
+    // TODO cameraProcessingThread.start();
 
     BadLog log = BadLog.init("/home/lvuser/test.bag");
     BadLog.createValue("Example Value", System.getProperty("os.version"));
@@ -61,7 +70,7 @@ public class Robot extends TimedRobot
   @Override
   public void robotPeriodic()
   {
-
+    // System.out.println(Arrays.toString(colorSensor.getRGB()));
   }
 
   /**
