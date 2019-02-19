@@ -11,7 +11,7 @@ public class CustomJoystick extends Joystick
 
     public final JoystickButton frontLeftButton = new JoystickButton(this, 5);
     public final JoystickButton frontRightButton = new JoystickButton(this, 6);
-    public final JoystickButton backleftButton = new JoystickButton(this, 3);
+    public final JoystickButton backLeftButton = new JoystickButton(this, 3);
     public final JoystickButton backRightButton = new JoystickButton(this, 4);
 
     public final JoystickButton button7 = new JoystickButton(this, 7);

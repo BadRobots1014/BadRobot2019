@@ -1,22 +1,24 @@
 package frc.robot.utils;
 
+import java.util.function.Supplier;
+
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
 public class SimplePIDSource implements PIDSource
 {
     private PIDSourceType pidSourceType = PIDSourceType.kDisplacement;
-    private final DataSource dataSource;
+    private final Supplier<Double> dataSupplier;
 
-    public SimplePIDSource(DataSource dataSource)
+    public SimplePIDSource(Supplier<Double> dataSupplier)
     {
-        this(PIDSourceType.kDisplacement, dataSource);
+        this(PIDSourceType.kDisplacement, dataSupplier);
     }
 
-    public SimplePIDSource(PIDSourceType type, DataSource dataSource)
+    public SimplePIDSource(PIDSourceType type, Supplier<Double> dataSupplier)
     {
         setPIDSourceType(type);
-        this.dataSource = dataSource;
+        this.dataSupplier = dataSupplier;
     }
 
     @Override
@@ -34,6 +36,6 @@ public class SimplePIDSource implements PIDSource
     @Override
     public double pidGet()
     {
-        return dataSource.getData();
+        return dataSupplier.get();
     }
 }

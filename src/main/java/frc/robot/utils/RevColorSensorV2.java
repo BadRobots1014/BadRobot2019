@@ -48,19 +48,19 @@ public class RevColorSensorV2 extends I2C implements AutoCloseable
     /**
      * RGBC Data Registers
      */
-    private final static int CDATA = 0x14; // Clear ADC low data register
+    private final static int CDATAL = 0x14; // Clear ADC low data register
     private final static int CDATAH = 0x15; // Clear ADC high data register
-    private final static int RDATA = 0x16; // Red ADC low data register
+    private final static int RDATAL = 0x16; // Red ADC low data register
     private final static int RDATAH = 0x17; // Red ADC high data register
-    private final static int GDATA = 0x18; // Green ADC low data register
+    private final static int GDATAL = 0x18; // Green ADC low data register
     private final static int GDATAH = 0x19; // Green ADC high data register
-    private final static int BDATA = 0x1A; // Blue ADC low data register
+    private final static int BDATAL = 0x1A; // Blue ADC low data register
     private final static int BDATAH = 0x1B; // Blue ADC high data register
 
     /**
      * Proximity Data Registers
      */
-    private final static int PDATA = 0x1C; // Proximity ADC low data register
+    private final static int PDATAL = 0x1C; // Proximity ADC low data register
     private final static int PDATAH = 0x1D; // Proximity ADC high data register
 
     /**
@@ -110,7 +110,7 @@ public class RevColorSensorV2 extends I2C implements AutoCloseable
     public short[] getRGBA()
     {
         byteBuffer.clear();
-        read(COMMAND | MULTI_BYTE_BIT | CDATA, 8, byteBuffer);
+        read(COMMAND | MULTI_BYTE_BIT | CDATAL, 8, byteBuffer);
 
         short alpha = asUnsignedShort(byteBuffer.getShort(0));
         short red = asUnsignedShort(byteBuffer.getShort(2));
@@ -122,7 +122,7 @@ public class RevColorSensorV2 extends I2C implements AutoCloseable
 
     public short getProximity()
     {
-        return readShort(PDATA);
+        return readShort(PDATAL);
     }
 
     public byte getControl()
