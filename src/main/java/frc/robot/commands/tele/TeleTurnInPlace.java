@@ -3,7 +3,7 @@ package frc.robot.commands.tele;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.utils.CustomXboxController;
+import frc.robot.utils.hardware.CustomXboxController;
 
 public class TeleTurnInPlace extends Command
 {

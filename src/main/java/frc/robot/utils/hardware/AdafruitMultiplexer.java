@@ -1,4 +1,4 @@
-package frc.robot.utils;
+package frc.robot.utils.hardware;
 
 import edu.wpi.first.wpilibj.I2C;
 

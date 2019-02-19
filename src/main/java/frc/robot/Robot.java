@@ -46,7 +46,7 @@ public class Robot extends TimedRobot
     driveTrain = new DriveTrain(this);
     lifter = new Lifter(this);
     backHatchCam = new BackHatchCam(this);
-    // grabber = new Grabber(this);
+    grabber = new Grabber(this);
     oi = new OI(this);
     // multicolorSensor = new MulticolorSensor();
 

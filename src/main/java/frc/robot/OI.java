@@ -5,8 +5,8 @@ import frc.robot.commands.tele.TeleTurnInPlace;
 import frc.robot.commands.ReverseDriveTrain;
 import frc.robot.commands.RotateGrabberCCW;
 import frc.robot.commands.RotateGrabberCW;
-import frc.robot.utils.CustomJoystick;
-import frc.robot.utils.CustomXboxController;
+import frc.robot.utils.hardware.CustomJoystick;
+import frc.robot.utils.hardware.CustomXboxController;
 
 /**
  * This class is the glue that binds the controls on the physical operator

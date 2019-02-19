@@ -5,8 +5,8 @@ import java.util.Arrays;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.utils.AdafruitMultiplexer;
-import frc.robot.utils.RevColorSensorV2;
+import frc.robot.utils.hardware.AdafruitMultiplexer;
+import frc.robot.utils.hardware.RevColorSensorV2;
 
 public class MulticolorSensor extends Subsystem
 {
