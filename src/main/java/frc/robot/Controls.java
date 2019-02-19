@@ -2,6 +2,8 @@ package frc.robot;
 
 import frc.robot.commands.tele.TeleDriveStraight;
 import frc.robot.commands.tele.TeleTurnInPlace;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Grabber;
 import frc.robot.commands.ReverseDriveTrain;
 import frc.robot.commands.RotateGrabberCCW;
 import frc.robot.commands.RotateGrabberCW;
@@ -22,13 +24,21 @@ public class Controls
   private Controls()
   {
     xboxController = new CustomXboxController(0);
-    xboxController.xButton.whileHeld(new TeleDriveStraight());
-    xboxController.yButton.whileHeld(new TeleTurnInPlace());
-    xboxController.aButton.whenPressed(new ReverseDriveTrain());
+
+    if (DriveTrain.isEnabled())
+    {
+      xboxController.xButton.whileHeld(new TeleDriveStraight());
+      xboxController.yButton.whileHeld(new TeleTurnInPlace());
+      xboxController.aButton.whenPressed(new ReverseDriveTrain());
+    }
 
     joystick = new CustomJoystick(1);
-    joystick.frontLeftButton.whileHeld(new RotateGrabberCW());
-    joystick.backLeftButton.whileHeld(new RotateGrabberCCW());
+
+    if (Grabber.isEnabled())
+    {
+      joystick.frontLeftButton.whileHeld(new RotateGrabberCW());
+      joystick.backLeftButton.whileHeld(new RotateGrabberCCW());
+    }
   }
 
   public static void init()
