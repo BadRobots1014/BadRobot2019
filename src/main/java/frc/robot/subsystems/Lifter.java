@@ -3,24 +3,37 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.tele.TeleLift;
 
-public class Lifter extends Subsystem
+public class Lifter extends BadSubsystem
 {
     private static final double ROTATIONS_PER_METER = 10; // TODO find this
 
-    private final Robot robot;
-
-    private final CANSparkMax lifterMotor;
+    private CANSparkMax lifterMotor;
 
     public Lifter(Robot robot)
     {
-        super();
-        this.robot = robot;
+        super(robot);
+    }
+
+    @Override
+    protected void initComponents()
+    {
         lifterMotor = new CANSparkMax(RobotMap.LIFTER_MOTOR, MotorType.kBrushless);
+    }
+
+    @Override
+    protected void initLogging()
+    {
+
+    }
+
+    @Override
+    protected void initDefaultCommand()
+    {
+        setDefaultCommand(new TeleLift(this, robot.oi.joystick));
     }
 
     // This should return 0 at the lowest height
@@ -47,11 +60,5 @@ public class Lifter extends Subsystem
     public void stopMotor()
     {
         lifterMotor.stopMotor();
-    }
-
-    @Override
-    protected void initDefaultCommand()
-    {
-        setDefaultCommand(new TeleLift(this, robot.oi.joystick));
     }
 }

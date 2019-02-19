@@ -15,5 +15,5 @@ public class RobotMap
    */
   public static final int LIFTER_MOTOR = 12;
   public static final int CAM_MOTOR = 25;
-  public static final int GRABBER_MOTOR = 14;
+  public static final int GRABBER_MOTOR = 21;
 }

@@ -1,20 +1,28 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.utils.hardware.CANTalonSRX;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class Grabber extends Subsystem
+public class Grabber extends BadSubsystem
 {
-    private final Robot robot;
     private CANTalonSRX grabberMotor;
 
     public Grabber(Robot robot)
     {
-        super();
-        this.robot = robot;
+        super(robot);
+    }
+
+    @Override
+    protected void initComponents()
+    {
         grabberMotor = new CANTalonSRX(RobotMap.GRABBER_MOTOR);
+    }
+
+    @Override
+    protected void initLogging()
+    {
+
     }
 
     public void rotate(double speed)
@@ -35,10 +43,5 @@ public class Grabber extends Subsystem
     public void stopMotor()
     {
         grabberMotor.stopMotor();
-    }
-
-    @Override
-    protected void initDefaultCommand()
-    {
     }
 }
