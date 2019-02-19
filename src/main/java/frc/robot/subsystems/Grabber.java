@@ -40,6 +40,5 @@ public class Grabber extends Subsystem
     @Override
     protected void initDefaultCommand()
     {
-        // TODO setDefaultCommand(new TeleGrab(robot.backHatchCam, robot.oi.xboxController));
     }
 }

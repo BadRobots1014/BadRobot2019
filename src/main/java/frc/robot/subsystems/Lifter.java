@@ -52,6 +52,6 @@ public class Lifter extends Subsystem
     @Override
     protected void initDefaultCommand()
     {
-        setDefaultCommand(new TeleLift(robot.lifter, robot.oi.joystick));
+        setDefaultCommand(new TeleLift(this, robot.oi.joystick));
     }
 }
