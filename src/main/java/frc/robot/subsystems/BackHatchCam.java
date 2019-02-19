@@ -1,18 +1,12 @@
 package frc.robot.subsystems;
 
 import frc.robot.utils.hardware.CANTalonSRX;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.tele.TeleBackHatchCam;
 
 public class BackHatchCam extends BadSubsystem
 {
     private CANTalonSRX motor;
-
-    public BackHatchCam(Robot robot)
-    {
-        super(robot);
-    }
 
     @Override
     protected void initComponents()
@@ -30,7 +24,7 @@ public class BackHatchCam extends BadSubsystem
     @Override
     protected void initDefaultCommand()
     {
-        setDefaultCommand(new TeleBackHatchCam(this, robot.oi.xboxController));
+        setDefaultCommand(new TeleBackHatchCam());
     }
 
     public void rotate(double speed)

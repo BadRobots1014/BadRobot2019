@@ -1,6 +1,8 @@
 package frc.robot.commands.tele;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Controls;
+import frc.robot.Subsystems;
 import frc.robot.subsystems.Lifter;
 import frc.robot.utils.hardware.CustomJoystick;
 
@@ -9,11 +11,11 @@ public class TeleLift extends Command
     protected final Lifter lifter;
     protected final CustomJoystick joystick;
 
-    public TeleLift(Lifter lifter, CustomJoystick joystick)
+    public TeleLift()
     {
-        super(lifter);
-        this.lifter = lifter;
-        this.joystick = joystick;
+        super(Subsystems.getInstance().lifter);
+        this.lifter = Subsystems.getInstance().lifter;
+        this.joystick = Controls.getInstance().joystick;
     }
 
     @Override

@@ -1,16 +1,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Robot;
 
 public abstract class BadSubsystem extends Subsystem
 {
-    protected final Robot robot;
-
-    public BadSubsystem(Robot robot)
+    public BadSubsystem()
     {
         super();
-        this.robot = robot;
 
         initComponents();
         initLogging();
@@ -24,5 +20,10 @@ public abstract class BadSubsystem extends Subsystem
     protected void initDefaultCommand()
     {
 
+    }
+
+    public static boolean isEnabled()
+    {
+        return true;
     }
 }

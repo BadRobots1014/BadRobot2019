@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 import frc.robot.utils.hardware.AdafruitMultiplexer;
 import frc.robot.utils.hardware.RevColorSensorV2;
 
@@ -13,11 +12,6 @@ public class MulticolorSensor extends BadSubsystem
     private AdafruitMultiplexer multiplexer;
     private RevColorSensorV2 colorSensor;
     private short[][] buffer;
-
-    public MulticolorSensor(Robot robot)
-    {
-        super(robot);
-    }
 
     @Override
     protected void initComponents()

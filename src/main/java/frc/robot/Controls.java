@@ -12,20 +12,33 @@ import frc.robot.utils.hardware.CustomXboxController;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI
+public class Controls
 {
+  private static Controls instance;
+
   public final CustomXboxController xboxController;
   public final CustomJoystick joystick;
 
-  public OI(Robot robot)
+  private Controls()
   {
     xboxController = new CustomXboxController(0);
-    xboxController.xButton.whileHeld(new TeleDriveStraight(robot.driveTrain, this.xboxController));
-    xboxController.yButton.whileHeld(new TeleTurnInPlace(robot.driveTrain, this.xboxController));
-    xboxController.aButton.whenPressed(new ReverseDriveTrain(robot.driveTrain));
+    xboxController.xButton.whileHeld(new TeleDriveStraight());
+    xboxController.yButton.whileHeld(new TeleTurnInPlace());
+    xboxController.aButton.whenPressed(new ReverseDriveTrain());
 
     joystick = new CustomJoystick(1);
-    joystick.frontLeftButton.whileHeld(new RotateGrabberCW(robot.grabber));
-    joystick.backLeftButton.whileHeld(new RotateGrabberCCW(robot.grabber));
+    joystick.frontLeftButton.whileHeld(new RotateGrabberCW());
+    joystick.backLeftButton.whileHeld(new RotateGrabberCCW());
+  }
+
+  public static void init()
+  {
+    if (instance == null)
+      instance = new Controls();
+  }
+
+  public static Controls getInstance()
+  {
+    return instance;
   }
 }

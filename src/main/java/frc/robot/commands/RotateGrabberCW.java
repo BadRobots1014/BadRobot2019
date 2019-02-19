@@ -1,16 +1,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Subsystems;
 import frc.robot.subsystems.Grabber;
 
 public class RotateGrabberCW extends Command
 {
     protected final Grabber grabber;
 
-    public RotateGrabberCW(Grabber grabber)
+    public RotateGrabberCW()
     {
-        super(grabber);
-        this.grabber = grabber;
+        super(Subsystems.getInstance().grabber);
+        this.grabber = Subsystems.getInstance().grabber;
     }
 
     @Override

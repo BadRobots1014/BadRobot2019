@@ -1,17 +1,11 @@
 package frc.robot.subsystems;
 
 import frc.robot.utils.hardware.CANTalonSRX;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class Grabber extends BadSubsystem
 {
     private CANTalonSRX grabberMotor;
-
-    public Grabber(Robot robot)
-    {
-        super(robot);
-    }
 
     @Override
     protected void initComponents()
@@ -43,5 +37,10 @@ public class Grabber extends BadSubsystem
     public void stopMotor()
     {
         grabberMotor.stopMotor();
+    }
+
+    public static boolean isEnabled()
+    {
+        return false;
     }
 }

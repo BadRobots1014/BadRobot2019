@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Subsystems;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.utils.SimplePIDSource;
 
@@ -13,10 +14,10 @@ public class DriveStraight extends Command
     private double angularOutput;
     private double linearOutput;
 
-    public DriveStraight(DriveTrain driveTrain, double distance_m)
+    public DriveStraight(double distance_m)
     {
-        super(driveTrain);
-        this.driveTrain = driveTrain;
+        super(Subsystems.getInstance().driveTrain);
+        this.driveTrain = Subsystems.getInstance().driveTrain;
 
         angularContoller = new PIDController(1, 1, 1, new SimplePIDSource(this::getCurrAngle), this::setAngularOutput);
         angularContoller.setSetpoint(getCurrAngle());

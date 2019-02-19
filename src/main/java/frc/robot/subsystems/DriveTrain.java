@@ -8,7 +8,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import badlog.lib.BadLog;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.tele.TeleDrive;
 
@@ -22,11 +21,6 @@ public class DriveTrain extends BadSubsystem
     private AHRS navx;
 
     private boolean reversed;
-
-    public DriveTrain(Robot robot)
-    {
-        super(robot);
-    }
 
     @Override
     protected void initComponents()
@@ -86,7 +80,7 @@ public class DriveTrain extends BadSubsystem
     @Override
     protected void initDefaultCommand()
     {
-        setDefaultCommand(new TeleDrive(this, robot.oi.xboxController));
+        setDefaultCommand(new TeleDrive());
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed)
