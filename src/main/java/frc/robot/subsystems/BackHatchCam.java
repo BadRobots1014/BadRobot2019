@@ -16,12 +16,6 @@ public class BackHatchCam extends BadSubsystem
     }
 
     @Override
-    protected void initLogging()
-    {
-        
-    }
-
-    @Override
     protected void initDefaultCommand()
     {
         setDefaultCommand(new TeleBackHatchCam());

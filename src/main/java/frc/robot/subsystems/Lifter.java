@@ -10,18 +10,12 @@ public class Lifter extends BadSubsystem
 {
     private static final double ROTATIONS_PER_METER = 10; // TODO find this
 
-    private CANSparkMax lifterMotor;
+    private CANSparkMax motor;
 
     @Override
     protected void initComponents()
     {
-        lifterMotor = new CANSparkMax(RobotMap.LIFTER_MOTOR, MotorType.kBrushless);
-    }
-
-    @Override
-    protected void initLogging()
-    {
-
+        motor = new CANSparkMax(RobotMap.LIFTER_MOTOR, MotorType.kBrushless);
     }
 
     @Override
@@ -33,7 +27,7 @@ public class Lifter extends BadSubsystem
     // This should return 0 at the lowest height
     public double getEncoderValue()
     {
-        return lifterMotor.getEncoder().getPosition();
+        return motor.getEncoder().getPosition();
     }
 
     public double getHeight()
@@ -48,11 +42,11 @@ public class Lifter extends BadSubsystem
 
     public void setSpeed(double speed)
     {
-        lifterMotor.set(speed);
+        motor.set(speed);
     }
 
     public void stopMotor()
     {
-        lifterMotor.stopMotor();
+        motor.stopMotor();
     }
 }

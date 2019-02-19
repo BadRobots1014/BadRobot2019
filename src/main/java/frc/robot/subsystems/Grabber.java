@@ -5,38 +5,32 @@ import frc.robot.RobotMap;
 
 public class Grabber extends BadSubsystem
 {
-    private CANTalonSRX grabberMotor;
+    private CANTalonSRX motor;
 
     @Override
     protected void initComponents()
     {
-        grabberMotor = new CANTalonSRX(RobotMap.GRABBER_MOTOR);
-    }
-
-    @Override
-    protected void initLogging()
-    {
-
+        motor = new CANTalonSRX(RobotMap.GRABBER_MOTOR);
     }
 
     public void rotate(double speed)
     {
-        grabberMotor.set(speed);
+        motor.set(speed);
     }
 
     public void rotateCW()
     {
-        grabberMotor.set(1);
+        motor.set(1);
     }
 
     public void rotateCCW()
     {
-        grabberMotor.set(-1);
+        motor.set(-1);
     }
 
     public void stopMotor()
     {
-        grabberMotor.stopMotor();
+        motor.stopMotor();
     }
 
     public static boolean isEnabled()

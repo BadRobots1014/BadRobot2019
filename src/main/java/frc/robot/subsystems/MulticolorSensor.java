@@ -23,12 +23,6 @@ public class MulticolorSensor extends BadSubsystem
     }
 
     @Override
-    protected void initLogging()
-    {
-
-    }
-
-    @Override
     protected void initDefaultCommand()
     {
         setDefaultCommand(new Command()
