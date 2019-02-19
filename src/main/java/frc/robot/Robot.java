@@ -7,21 +7,15 @@
 
 package frc.robot;
 
-import java.util.Arrays;
+import java.util.UUID;
 
 import badlog.lib.BadLog;
-import badlog.lib.DataInferMode;
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Lifter;
 import frc.robot.subsystems.MulticolorSensor;
-import frc.robot.utils.CameraProcessingThread;
-import frc.robot.utils.AdafruitMultiplexer;
-import frc.robot.utils.RevColorSensorV2;
 import frc.robot.subsystems.BackHatchCam;
 
 /**
@@ -33,26 +27,31 @@ import frc.robot.subsystems.BackHatchCam;
  */
 public class Robot extends TimedRobot
 {
-  public final DriveTrain driveTrain = new DriveTrain(this);
-  public final Lifter lifter = new Lifter(this);
-  public final BackHatchCam backHatchCam = new BackHatchCam(this);
-  public final Grabber grabber = new Grabber(this);
-  public final OI oi = new OI(this);
+  public DriveTrain driveTrain;
+  public Lifter lifter;
+  public BackHatchCam backHatchCam;
+  public Grabber grabber;
+  public OI oi;
+  // public MulticolorSensor multicolorSensor;
   // TODO private final CameraProcessingThread cameraProcessingThread = new
   // CameraProcessingThread();
   // public final LightDriveCAN lightDriveCAN = new LightDriveCAN(10);
-  public final MulticolorSensor multicolorSensor = new MulticolorSensor();
 
   @Override
   public void robotInit()
   {
-    // TODO cameraProcessingThread.start();
+    BadLog log = BadLog.init("/home/lvuser/" + UUID.randomUUID() + ".badbag");
 
-    BadLog log = BadLog.init("/home/lvuser/test.bag");
-    BadLog.createValue("Example Value", System.getProperty("os.version"));
-    BadLog.createTopic("Example Topic", "Bytes", () -> (double) Runtime.getRuntime().freeMemory());
-    BadLog.createTopic("Topic with attributes", BadLog.UNITLESS, () -> 3.2, "attr1", "attr2");
-    BadLog.createTopicSubscriber("Subscribed topic", "s", DataInferMode.DEFAULT);
+    // TODO cameraProcessingThread.start();
+    driveTrain = new DriveTrain(this);
+    lifter = new Lifter(this);
+    backHatchCam = new BackHatchCam(this);
+    // grabber = new Grabber(this);
+    oi = new OI(this);
+    // multicolorSensor = new MulticolorSensor();
+
+    BadLog.createValue("OS Version", System.getProperty("os.version"));
+    BadLog.createTopic("Free Memory", "Bytes", () -> (double) Runtime.getRuntime().freeMemory());
     log.finishInitialization();
 
     // lightDriveCAN.SetColor(1, Color.BLUE);

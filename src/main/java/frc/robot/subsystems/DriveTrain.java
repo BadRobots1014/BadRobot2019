@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import badlog.lib.BadLog;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -48,6 +49,34 @@ public class DriveTrain extends Subsystem
         backRightMotor.follow(frontRightMotor);
 
         differentialDrive = new DifferentialDrive(frontLeftMotor, frontRightMotor);
+
+        BadLog.createValue("Drivetrain/Right Front Firmware", frontRightMotor.getFirmwareString());
+        BadLog.createValue("Drivetrain/Left Front Firmware", frontLeftMotor.getFirmwareString());
+        BadLog.createValue("Drivetrain/Right Back Firmware", backRightMotor.getFirmwareString());
+        BadLog.createValue("Drivetrain/Left Back Firmware", backLeftMotor.getFirmwareString());
+
+        BadLog.createTopic("Drivetrain/Right Output Percent", BadLog.UNITLESS, () -> frontRightMotor.get(), "hide",
+                "join:Drivetrain/Output Percents");
+        BadLog.createTopic("Drivetrain/Left Output Percent", BadLog.UNITLESS, () -> frontLeftMotor.get(), "hide",
+                "join:Drivetrain/Output Percents");
+
+        BadLog.createTopic("Drivetrain/Right Front Current", "A", () -> frontRightMotor.getOutputCurrent(), "hide",
+                "join:Drivetrain/Output Currents");
+        BadLog.createTopic("Drivetrain/Right Back Current", "A", () -> backRightMotor.getOutputCurrent(), "hide",
+                "join:Drivetrain/Output Currents");
+        BadLog.createTopic("Drivetrain/Left Front Current", "A", () -> frontLeftMotor.getOutputCurrent(), "hide",
+                "join:Drivetrain/Output Currents");
+        BadLog.createTopic("Drivetrain/Left Back Current", "A", () -> backLeftMotor.getOutputCurrent(), "hide",
+                "join:Drivetrain/Output Currents");
+
+        BadLog.createTopic("Drivetrain/Right Front Temperature", "C", () -> frontRightMotor.getMotorTemperature(),
+                "hide", "join:Drivetrain/Output Temperatures");
+        BadLog.createTopic("Drivetrain/Right Back Temperature", "C", () -> backRightMotor.getMotorTemperature(), "hide",
+                "join:Drivetrain/Output Temperatures");
+        BadLog.createTopic("Drivetrain/Left Front Temperature", "C", () -> frontLeftMotor.getMotorTemperature(), "hide",
+                "join:Drivetrain/Output Temperatures");
+        BadLog.createTopic("Drivetrain/Left Back Temperature", "C", () -> backLeftMotor.getMotorTemperature(), "hide",
+                "join:Drivetrain/Output Temperatures");
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed)
