@@ -35,6 +35,6 @@ public class Grabber extends BadSubsystem
 
     public static boolean isEnabled()
     {
-        return false;
+        return true;
     }
 }

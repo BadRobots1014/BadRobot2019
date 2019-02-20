@@ -13,9 +13,12 @@ public abstract class BadSubsystem extends Subsystem
     public BadSubsystem()
     {
         super();
+        System.out.println("Subsystems/" + getClass().getSimpleName() + " : Initialization Started");
 
         initComponents();
         initLogging();
+
+        System.out.println("Subsystems/" + getClass().getSimpleName() + " : Initialization Finished");
     }
 
     protected abstract void initComponents();
@@ -61,7 +64,7 @@ public abstract class BadSubsystem extends Subsystem
                 }
             } catch (Exception e)
             {
-                e.printStackTrace();
+                continue;
             }
         }
     }
@@ -74,6 +77,6 @@ public abstract class BadSubsystem extends Subsystem
 
     public static boolean isEnabled()
     {
-        return true;
+        return false;
     }
 }

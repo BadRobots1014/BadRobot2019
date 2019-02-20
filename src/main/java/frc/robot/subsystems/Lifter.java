@@ -49,4 +49,9 @@ public class Lifter extends BadSubsystem
     {
         motor.stopMotor();
     }
+
+    public static boolean isEnabled()
+    {
+        return true;
+    }
 }

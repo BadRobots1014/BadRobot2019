@@ -45,4 +45,9 @@ public class BackHatchCam extends BadSubsystem
     {
         return motor.getSensorCollection().isFwdLimitSwitchClosed();
     }
+
+    public static boolean isEnabled()
+    {
+        return true;
+    }
 }
