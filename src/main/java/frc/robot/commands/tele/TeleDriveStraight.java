@@ -9,19 +9,19 @@ import frc.robot.utils.hardware.CustomXboxController;
 
 public class TeleDriveStraight extends PIDCommand
 {
-    protected final DriveTrain driveTrain;
-    protected final CustomXboxController xboxController;
+    protected DriveTrain driveTrain;
+    protected CustomXboxController xboxController;
 
     public TeleDriveStraight()
     {
         super(1, 1, 1, Subsystems.getInstance().driveTrain);
-        this.driveTrain = Subsystems.getInstance().driveTrain;
-        this.xboxController = Controls.getInstance().xboxController;
     }
 
     @Override
     protected void initialize()
     {
+        this.driveTrain = Subsystems.getInstance().driveTrain;
+        this.xboxController = Controls.getInstance().xboxController;
         setSetpoint(driveTrain.getAngle());
     }
 

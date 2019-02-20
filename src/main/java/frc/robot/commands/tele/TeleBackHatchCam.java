@@ -9,12 +9,17 @@ import frc.robot.utils.hardware.CustomXboxController;
 
 public class TeleBackHatchCam extends Command
 {
-    protected final BackHatchCam backHatchCam;
-    protected final CustomXboxController xboxController;
+    protected BackHatchCam backHatchCam;
+    protected CustomXboxController xboxController;
 
     public TeleBackHatchCam()
     {
         super(Subsystems.getInstance().backHatchCam);
+    }
+
+    @Override
+    protected void initialize()
+    {
         this.backHatchCam = Subsystems.getInstance().backHatchCam;
         this.xboxController = Controls.getInstance().xboxController;
     }
@@ -23,9 +28,8 @@ public class TeleBackHatchCam extends Command
     protected void execute()
     {
         double rightTrigger = xboxController.getTriggerAxis(Hand.kRight);
-        rightTrigger *= rightTrigger;
+
         double leftTrigger = xboxController.getTriggerAxis(Hand.kLeft);
-        leftTrigger *= leftTrigger;
 
         if (rightTrigger > 0.05)
             backHatchCam.rotate(rightTrigger);

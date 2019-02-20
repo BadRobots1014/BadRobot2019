@@ -9,12 +9,17 @@ import frc.robot.utils.hardware.CustomXboxController;
 
 public class TeleDrive extends Command
 {
-    protected final DriveTrain driveTrain;
-    protected final CustomXboxController xboxController;
+    protected DriveTrain driveTrain;
+    protected CustomXboxController xboxController;
 
     public TeleDrive()
     {
         super(Subsystems.getInstance().driveTrain);
+    }
+
+    @Override
+    protected void initialize()
+    {
         this.driveTrain = Subsystems.getInstance().driveTrain;
         this.xboxController = Controls.getInstance().xboxController;
     }

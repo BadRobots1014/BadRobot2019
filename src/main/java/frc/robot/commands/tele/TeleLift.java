@@ -8,12 +8,17 @@ import frc.robot.utils.hardware.CustomJoystick;
 
 public class TeleLift extends Command
 {
-    protected final Lifter lifter;
-    protected final CustomJoystick joystick;
+    protected Lifter lifter;
+    protected CustomJoystick joystick;
 
     public TeleLift()
     {
         super(Subsystems.getInstance().lifter);
+    }
+
+    @Override
+    protected void initialize()
+    {
         this.lifter = Subsystems.getInstance().lifter;
         this.joystick = Controls.getInstance().joystick;
     }
@@ -21,7 +26,7 @@ public class TeleLift extends Command
     @Override
     protected void execute()
     {
-        lifter.setSpeed(-joystick.getY());
+        lifter.setSpeed(joystick.getY());
     }
 
     @Override

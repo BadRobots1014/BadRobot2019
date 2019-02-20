@@ -9,12 +9,17 @@ import frc.robot.utils.hardware.CustomXboxController;
 
 public class TeleTurnInPlace extends Command
 {
-    protected final DriveTrain driveTrain;
-    protected final CustomXboxController xboxController;
+    protected DriveTrain driveTrain;
+    protected CustomXboxController xboxController;
 
     public TeleTurnInPlace()
     {
         super(Subsystems.getInstance().driveTrain);
+    }
+
+    @Override
+    protected void initialize()
+    {
         this.driveTrain = Subsystems.getInstance().driveTrain;
         this.xboxController = Controls.getInstance().xboxController;
     }
