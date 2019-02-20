@@ -15,7 +15,7 @@ public class Robot extends TimedRobot
   @Override
   public void robotInit()
   {
-    var timestamp = new SimpleDateFormat("dd-MM-yyyy-HH-mm").format(new Date());
+    String timestamp = new SimpleDateFormat("dd-MM-yyyy-HH-mm").format(new Date());
     logger = BadLog.init("/home/lvuser/" + timestamp + ".badbag");
 
     BadLog.createValue("Match Type", DriverStation.getInstance().getMatchType().toString());

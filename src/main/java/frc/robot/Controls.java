@@ -23,6 +23,8 @@ public class Controls
 
   private Controls()
   {
+    System.out.println("Controls : Initialization Started");
+
     xboxController = new CustomXboxController(0);
 
     if (DriveTrain.isEnabled())
@@ -39,6 +41,8 @@ public class Controls
       joystick.frontLeftButton.whileHeld(new RotateGrabberCW());
       joystick.backLeftButton.whileHeld(new RotateGrabberCCW());
     }
+
+    System.out.println("Controls : Initialization Finished");
   }
 
   public static void init()

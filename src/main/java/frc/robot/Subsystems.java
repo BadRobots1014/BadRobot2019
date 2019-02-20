@@ -21,6 +21,8 @@ public class Subsystems
 
     private Subsystems()
     {
+        System.out.println("Subsystems : Initialization Started");
+
         if (BackHatchCam.isEnabled())
             backHatchCam = new BackHatchCam();
 
@@ -35,6 +37,8 @@ public class Subsystems
 
         if (MulticolorSensor.isEnabled())
             multicolorSensor = new MulticolorSensor();
+            
+        System.out.println("Subsystems : Initialization Finished");
     }
 
     public static void init()
