@@ -7,6 +7,6 @@ public class PlaceHatch extends CommandGroup
     public PlaceHatch(double height)
     {
         addSequential(new SetLifterHeight(height));
-        addSequential(new RotateGrabberCCW()); // TODO change this
+        addSequential(new SpinGrabberCCW()); // TODO change this
     }
 }

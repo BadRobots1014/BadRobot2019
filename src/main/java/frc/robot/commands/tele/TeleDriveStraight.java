@@ -1,6 +1,5 @@
 package frc.robot.commands.tele;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.Controls;
 import frc.robot.Subsystems;
@@ -9,19 +8,19 @@ import frc.robot.utils.hardware.CustomXboxController;
 
 public class TeleDriveStraight extends PIDCommand
 {
-    protected final DriveTrain driveTrain;
-    protected final CustomXboxController xboxController;
+    protected DriveTrain driveTrain;
+    protected CustomXboxController xboxController;
 
     public TeleDriveStraight()
     {
         super(1, 1, 1, Subsystems.getInstance().driveTrain);
-        this.driveTrain = Subsystems.getInstance().driveTrain;
-        this.xboxController = Controls.getInstance().xboxController;
     }
 
     @Override
     protected void initialize()
     {
+        this.driveTrain = Subsystems.getInstance().driveTrain;
+        this.xboxController = Controls.getInstance().xboxController;
         setSetpoint(driveTrain.getAngle());
     }
 
@@ -34,7 +33,7 @@ public class TeleDriveStraight extends PIDCommand
     @Override
     protected void usePIDOutput(double output)
     {
-        double speed = xboxController.getY(Hand.kLeft);
+        double speed = Controls.getInstance().getLeftY();
         // Robot.driveTrain.tankDrive(speed + output, speed - output);
         driveTrain.tankDrive(speed, speed);
     }

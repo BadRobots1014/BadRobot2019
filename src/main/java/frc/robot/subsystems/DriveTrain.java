@@ -104,4 +104,9 @@ public class DriveTrain extends BadSubsystem
         navx.close();
         super.close();
     }
+
+    public static boolean isEnabled()
+    {
+        return true;
+    }
 }

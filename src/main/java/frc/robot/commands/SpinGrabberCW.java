@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Subsystems;
 import frc.robot.subsystems.Grabber;
 
-public class RotateGrabberCW extends Command
+public class SpinGrabberCW extends Command
 {
     protected final Grabber grabber;
 
-    public RotateGrabberCW()
+    public SpinGrabberCW()
     {
         super(Subsystems.getInstance().grabber);
         this.grabber = Subsystems.getInstance().grabber;
@@ -17,7 +17,7 @@ public class RotateGrabberCW extends Command
     @Override
     protected void initialize()
     {
-        grabber.rotateCW();
+        grabber.spinCW();
     }
 
     @Override

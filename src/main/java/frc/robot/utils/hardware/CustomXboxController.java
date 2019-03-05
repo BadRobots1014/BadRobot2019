@@ -2,6 +2,7 @@ package frc.robot.utils.hardware;
 
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.hal.HAL;
 
@@ -17,6 +18,41 @@ public class CustomXboxController extends GenericHID
     public final JoystickButton startButton = new JoystickButton(this, 8);
     public final JoystickButton stickLeftButton = new JoystickButton(this, 9);
     public final JoystickButton stickRightButton = new JoystickButton(this, 10);
+    public final Button dpadUp = new Button()
+    {
+        @Override
+        public boolean get()
+        {
+            return CustomXboxController.this.getPOV() >= 45 && CustomXboxController.this.getPOV() <= 135;
+        }
+    };
+
+    public final Button dpadDown = new Button()
+    {
+        @Override
+        public boolean get()
+        {
+            return CustomXboxController.this.getPOV() >= 225 && CustomXboxController.this.getPOV() <= 315;
+        }
+    };
+
+    public final Button dpadRight = new Button()
+    {
+        @Override
+        public boolean get()
+        {
+            return CustomXboxController.this.getPOV() == 0;
+        }
+    };
+
+    public final Button dpadLeft = new Button()
+    {
+        @Override
+        public boolean get()
+        {
+            return CustomXboxController.this.getPOV() == 180;
+        }
+    };
 
     /**
      * Construct an instance of a joystick. The joystick index is the USB port on

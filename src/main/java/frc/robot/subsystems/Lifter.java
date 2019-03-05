@@ -8,7 +8,7 @@ import frc.robot.commands.tele.TeleLift;
 
 public class Lifter extends BadSubsystem
 {
-    private static final double ROTATIONS_PER_METER = 10; // TODO find this
+    private static final double ROTATIONS_PER_METER = 23.5; // TODO find this
 
     private CANSparkMax motor;
 
@@ -30,6 +30,11 @@ public class Lifter extends BadSubsystem
         return motor.getEncoder().getPosition();
     }
 
+    public void zeroEncoder()
+    {
+        motor.getEncoder().setPosition(0);
+    }
+
     public double getHeight()
     {
         return rotationsToMeters(getEncoderValue());
@@ -48,5 +53,10 @@ public class Lifter extends BadSubsystem
     public void stopMotor()
     {
         motor.stopMotor();
+    }
+
+    public static boolean isEnabled()
+    {
+        return true;
     }
 }

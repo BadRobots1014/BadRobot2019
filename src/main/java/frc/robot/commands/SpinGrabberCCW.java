@@ -1,10 +1,10 @@
 package frc.robot.commands;
 
-public class RotateGrabberCCW extends RotateGrabberCW
+public class SpinGrabberCCW extends SpinGrabberCW
 {
     @Override
     protected void initialize()
     {
-        grabber.rotateCCW();
+        grabber.spinCCW();
     }
 }

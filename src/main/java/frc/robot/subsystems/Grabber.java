@@ -13,17 +13,17 @@ public class Grabber extends BadSubsystem
         motor = new CANTalonSRX(RobotMap.GRABBER_MOTOR);
     }
 
-    public void rotate(double speed)
+    public void spin(double speed)
     {
         motor.set(speed);
     }
 
-    public void rotateCW()
+    public void spinCW()
     {
         motor.set(1);
     }
 
-    public void rotateCCW()
+    public void spinCCW()
     {
         motor.set(-1);
     }
@@ -35,6 +35,6 @@ public class Grabber extends BadSubsystem
 
     public static boolean isEnabled()
     {
-        return false;
+        return true;
     }
 }
