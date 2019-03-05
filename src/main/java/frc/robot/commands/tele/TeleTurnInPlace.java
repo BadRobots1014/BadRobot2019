@@ -7,11 +7,16 @@ import frc.robot.subsystems.DriveTrain;
 
 public class TeleTurnInPlace extends Command
 {
-    protected final DriveTrain driveTrain;
+    protected DriveTrain driveTrain;
 
     public TeleTurnInPlace()
     {
         super(Subsystems.getInstance().driveTrain);
+    }
+
+    @Override
+    protected void initialize()
+    {
         this.driveTrain = Subsystems.getInstance().driveTrain;
     }
 

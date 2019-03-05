@@ -5,12 +5,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Controls;
 import frc.robot.Subsystems;
 import frc.robot.subsystems.Lifter;
+import frc.robot.utils.hardware.CustomJoystick;
 import frc.robot.utils.hardware.CustomXboxController;
 
 public class TeleLift extends Command
 {
     protected Lifter lifter;
-    protected Joystick joystick;
+    protected CustomJoystick joystick;
 
     public TeleLift()
     {

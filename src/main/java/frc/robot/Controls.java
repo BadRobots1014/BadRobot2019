@@ -38,6 +38,7 @@ public class Controls
   {
     System.out.println("Controls : Initialization Started");
 
+<<<<<<< HEAD
     mainController = new CustomXboxController(0);
     frontAuxController = new CustomXboxController(1);
     backAuxController = new CustomXboxController(1);
@@ -45,6 +46,9 @@ public class Controls
     xboxController = mainController;
 
     mainController.startButton.whenPressed(new SwitchControls());
+=======
+    xboxController = new CustomXboxController(0);
+>>>>>>> 1c2b4843b25b8ef1dd1a0cb200631575c4880199
 
     if (DriveTrain.isEnabled())
     {
@@ -124,6 +128,7 @@ public class Controls
       frontAuxController.dpadDown.whenPressed(new SetLifterHeight(LifterLevel.GROUND));
     }
 
+<<<<<<< HEAD
     joystick = new CustomJoystick(2);
 
     if (Lifter.isEnabled())
@@ -178,6 +183,9 @@ public class Controls
       xboxController = frontAuxController;
     else
       xboxController = mainController;
+=======
+    System.out.println("Controls : Initialization Finished");
+>>>>>>> 1c2b4843b25b8ef1dd1a0cb200631575c4880199
   }
 
   public static void init()

@@ -41,6 +41,7 @@ public class Subsystems
 
         if (MulticolorSensor.isEnabled())
             multicolorSensor = new MulticolorSensor();
+<<<<<<< HEAD
 
         if (DualCameras.isEnabled())
             dualCameras = new DualCameras();
@@ -48,6 +49,9 @@ public class Subsystems
         if (Articulator.isEnabled())
             articulator = new Articulator();
 
+=======
+            
+>>>>>>> 1c2b4843b25b8ef1dd1a0cb200631575c4880199
         System.out.println("Subsystems : Initialization Finished");
     }
 
