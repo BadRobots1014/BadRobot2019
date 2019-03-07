@@ -39,6 +39,7 @@ public class Robot extends TimedRobot
   @Override
   public void robotPeriodic()
   {
+    // System.err.println(Subsystems.getInstance().lifter.getEncoderValue());
   }
 
   @Override

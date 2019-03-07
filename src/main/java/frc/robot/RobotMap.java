@@ -14,7 +14,7 @@ public class RobotMap
    * Aux Motors
    */
   public static final int LIFTER_MOTOR = 12;
-  public static final int CAM_MOTOR = 25;
-  public static final int ARTICULATOR_MOTOR = 23;
+  public static final int CAM_MOTOR = 23;
+  public static final int ARTICULATOR_MOTOR = 25;
   public static final int GRABBER_MOTOR = 21;
 }

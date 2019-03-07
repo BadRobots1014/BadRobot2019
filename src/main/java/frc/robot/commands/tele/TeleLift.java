@@ -35,8 +35,6 @@ public class TeleLift extends Command
         lifter.setSpeed(speed);
         // else
         // lifter.stopMotor();
-
-        System.err.println(lifter.getEncoderValue());
     }
 
     @Override

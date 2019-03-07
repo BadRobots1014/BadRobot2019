@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
+import frc.robot.commands.tele.TeleArticulate;
 import frc.robot.utils.hardware.CANTalonSRX;
 
 public class Articulator extends BadSubsystem
@@ -13,6 +14,12 @@ public class Articulator extends BadSubsystem
         motor = new CANTalonSRX(RobotMap.ARTICULATOR_MOTOR);
     }
 
+    @Override
+    protected void initDefaultCommand()
+    {
+        setDefaultCommand(new TeleArticulate());
+    }
+
     public void rotate(double speed)
     {
         motor.set(speed);
@@ -21,5 +28,10 @@ public class Articulator extends BadSubsystem
     public void stopMotor()
     {
         motor.stopMotor();
+    }
+
+    public static boolean isEnabled()
+    {
+        return false;
     }
 }

@@ -8,7 +8,7 @@ import frc.robot.commands.tele.TeleLift;
 
 public class Lifter extends BadSubsystem
 {
-    private static final double ROTATIONS_PER_METER = 23.5; // TODO find this
+    private static final double ROTATIONS_PER_METER = -23.5; // TODO find this
 
     private CANSparkMax motor;
 
