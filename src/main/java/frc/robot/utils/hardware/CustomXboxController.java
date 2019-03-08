@@ -54,6 +54,24 @@ public class CustomXboxController extends GenericHID
         }
     };
 
+    public final Button rightTrigger = new Button()
+    {
+        @Override
+        public boolean get()
+        {
+            return CustomXboxController.this.getTriggerAxis(Hand.kRight) > 0.1;
+        }
+    };
+
+    public final Button leftTrigger = new Button()
+    {
+        @Override
+        public boolean get()
+        {
+            return CustomXboxController.this.getTriggerAxis(Hand.kLeft) > 0.1;
+        }
+    };
+
     /**
      * Construct an instance of a joystick. The joystick index is the USB port on
      * the drivers station.

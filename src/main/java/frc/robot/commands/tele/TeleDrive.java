@@ -21,7 +21,7 @@ public class TeleDrive extends Command
     protected void initialize()
     {
         this.driveTrain = Subsystems.getInstance().driveTrain;
-        this.xboxController = Controls.getInstance().xboxController;
+        this.xboxController = Controls.getInstance().mainController;
     }
 
     @Override

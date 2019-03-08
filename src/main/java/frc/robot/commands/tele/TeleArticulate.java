@@ -1,5 +1,6 @@
 package frc.robot.commands.tele;
 
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Controls;
@@ -7,6 +8,7 @@ import frc.robot.Subsystems;
 import frc.robot.subsystems.Articulator;
 import frc.robot.utils.hardware.CustomJoystick;
 import frc.robot.utils.hardware.CustomXboxController;
+import frc.robot.utils.hardware.RevColorSensorV2;
 
 public class TeleArticulate extends Command
 {
@@ -22,7 +24,7 @@ public class TeleArticulate extends Command
     protected void initialize()
     {
         this.articulator = Subsystems.getInstance().articulator;
-        this.xboxController = Controls.getInstance().xboxController;
+        this.xboxController = Controls.getInstance().mainController;
     }
 
     @Override

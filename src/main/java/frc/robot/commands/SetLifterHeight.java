@@ -7,16 +7,16 @@ import frc.robot.subsystems.Lifter;
 public class SetLifterHeight extends PIDCommand
 {
     protected final Lifter lifter;
-    protected final double height;
+    protected double height;
     protected long startTime;
 
     public SetLifterHeight(double height)
     {
         super(0.1, 0.15, 0.15, Subsystems.getInstance().lifter);
         this.lifter = Subsystems.getInstance().lifter;
-        this.height = height;
-        getPIDController().setPercentTolerance(5); // TODO tweak tolerance
-        setSetpoint(height);
+        this.height = -height;
+        // getPIDController().setPercentTolerance(5); // TODO tweak tolerance
+        setSetpoint(this.height);
     }
 
     @Override
@@ -30,15 +30,14 @@ public class SetLifterHeight extends PIDCommand
     @Override
     protected double returnPIDInput()
     {
-        return lifter.getHeight();
+        return lifter.getEncoderValue();
     }
 
     @Override
     protected void usePIDOutput(double output)
     {
-        System.err.println("E: " + lifter.getEncoderValue() + "\t\t|\t\tPID: " + output + "\t\t|\t\tHeight: "
-                + lifter.getHeight());
-        lifter.setSpeed(output * -0.25);
+        System.err.println("E: " + lifter.getEncoderValue() + "\t\t|\t\tPID: " + output);
+        lifter.setSpeed(output * 0.65);
     }
 
     @Override
@@ -48,9 +47,15 @@ public class SetLifterHeight extends PIDCommand
     }
 
     @Override
+    protected void interrupted()
+    {
+        end();
+    }
+
+    @Override
     protected boolean isFinished()
     {
-        if (Math.abs(getSetpoint() - lifter.getHeight()) <= getSetpoint() * 0.1)
+        if (Math.abs(getSetpoint() - lifter.getEncoderValue()) <= getSetpoint() * 0.2)
         {
             System.err.println("Time: " + ((System.currentTimeMillis() - startTime) / 1000.0));
             return true;

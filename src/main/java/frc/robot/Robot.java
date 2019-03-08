@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import badlog.lib.BadLog;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -39,7 +40,7 @@ public class Robot extends TimedRobot
   @Override
   public void robotPeriodic()
   {
-    // System.err.println(Subsystems.getInstance().lifter.getEncoderValue());
+    // System.err.println(Controls.getInstance().joystick.getPOV());
   }
 
   @Override

@@ -9,38 +9,39 @@ import edu.wpi.first.cameraserver.CameraServer;
 
 public class DualCameras extends BadSubsystem
 {
-    private VideoSink server;
-    private UsbCamera camera1, camera2;
+    // private VideoSink server;
+    private UsbCamera camera;// , camera2;
 
     @Override
     protected void initComponents()
     {
         VideoMode videoMode = new VideoMode(PixelFormat.kYUYV, 320, 180, 30);
 
-        camera1 = CameraServer.getInstance().startAutomaticCapture(0);
-        camera1.setVideoMode(videoMode);
-        camera1.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
+        camera = CameraServer.getInstance().startAutomaticCapture(0);
+        camera.setVideoMode(videoMode);
+        // camera.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
 
-        camera2 = CameraServer.getInstance().startAutomaticCapture(1);
-        camera2.setVideoMode(videoMode);
-        camera2.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
+        // camera2 = CameraServer.getInstance().startAutomaticCapture(1);
+        // camera2.setVideoMode(videoMode);
+        // camera2.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
 
-        server = CameraServer.getInstance().addServer("POV");
-        server.setSource(camera1);
+        // server = CameraServer.getInstance().addServer("POV");
+        // server.setSource(camera);
 
         System.err.println("POV Camera Server Created");
     }
 
     public void toggle()
     {
-        if (server.getSource() == camera1)
-            server.setSource(camera2);
-        else
-            server.setSource(camera1);
+        // if (server.getSource() == camera)
+        // server.setSource(camera2);
+        // else
+        // server.setSource(camera);
+        System.err.println("Toggle cameras not implemented");
     }
 
     public static boolean isEnabled()
     {
-        return false;
+        return true;
     }
 }

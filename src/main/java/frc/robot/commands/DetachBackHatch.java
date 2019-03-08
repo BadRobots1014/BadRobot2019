@@ -1,10 +1,10 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Subsystems;
 import frc.robot.subsystems.BackHatchCam;
 
-public class DetachBackHatch extends TimedCommand
+public class DetachBackHatch extends Command
 {
     protected final BackHatchCam backHatchCam;
 
@@ -30,5 +30,11 @@ public class DetachBackHatch extends TimedCommand
     protected void interrupted()
     {
         end();
+    }
+
+    @Override
+    protected boolean isFinished()
+    {
+        return false;
     }
 }

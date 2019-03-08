@@ -18,7 +18,7 @@ public class BackHatchCam extends BadSubsystem
     @Override
     protected void initDefaultCommand()
     {
-        setDefaultCommand(new TeleBackHatchCam());
+        // setDefaultCommand(new TeleBackHatchCam());
     }
 
     public void rotate(double speed)

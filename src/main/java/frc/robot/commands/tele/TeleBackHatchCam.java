@@ -21,7 +21,7 @@ public class TeleBackHatchCam extends Command
     protected void initialize()
     {
         this.backHatchCam = Subsystems.getInstance().backHatchCam;
-        this.xboxController = Controls.getInstance().xboxController;
+        this.xboxController = Controls.getInstance().mainController;
     }
 
     @Override

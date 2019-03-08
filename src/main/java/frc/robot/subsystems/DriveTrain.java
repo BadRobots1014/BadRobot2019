@@ -19,7 +19,7 @@ public class DriveTrain extends BadSubsystem
     private DifferentialDrive differentialDrive;
     private AHRS navx;
 
-    private boolean reversed;
+    private boolean reversed = false;
 
     @Override
     protected void initComponents()
